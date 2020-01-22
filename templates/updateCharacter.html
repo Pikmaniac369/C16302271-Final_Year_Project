@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Characters: Update Character</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Update your character below:</h1>
+
+    <div class="form">
+        <form action="/updateCharacter/{{character.cID}}" method="POST">
+            <label>Name: </label><input type="text" name="cName" id="cName" value="{{character.cName}}">
+            <br>
+            <label>Age: </label><input type="number" name="cAge" id="cAge" value="{{character.cAge}}">
+            <br>
+            <label>Race: </label><input type="text" name="cRace" id="cRace" value="{{character.cRace}}">
+            <br>
+            <label>Description/Backstory: </label><input type="text" name="cDesc" id="cDesc" value="{{character.cDesc}}">
+            <br>
+            <label>Strength: </label><input type="number" name="cStr" id="cStr" value="{{character.cStr}}">
+            <br>
+            <label>Dexterity: </label><input type="number" name="cDex" id="cDex" value="{{character.cDex}}">
+            <br>
+            <label>Constitution: </label><input type="number" name="cCon" id="cCon" value="{{character.cCon}}">
+            <br>
+            <label>Intelligence: </label><input type="number" name="cInt" id="cInt" value="{{character.cInt}}">
+            <br>
+            <label>Wisdom: </label><input type="number" name="cWis" id="cWis" value="{{character.cWis}}">
+            <br>
+            <label>Charisma: </label><input type="number" name="cCha" id="cCha" value="{{character.cCha}}">
+            <br>
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+
+</div>
+{% endblock %}

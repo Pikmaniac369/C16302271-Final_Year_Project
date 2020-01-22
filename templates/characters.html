@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Characters</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center;">Hello. Welcome to the characters page!</h1>
+    <h2 style="text-align: center;">Enter your character's details below:</h2>
+    <div class="form">
+        <form action="characters.html" method="POST">
+            <label>Name: <input type="text" name="cName" id="cName" required></label>
+            <br>
+            <label>Age: <input type="number" name="cAge" id="cAge"></label>
+            <br>
+            <label>Race: <input type="text" name="cRace" id="cRace"></label>
+            <br>
+            <label>Description/Backstory: <input type="text" name="cDesc" id="cDesc"></label>
+            <br>
+            <label>Strength: <input type="number" name="cStr" id="cStr"></label>
+            <br>
+            <label>Dexterity: <input type="number" name="cDex" id="cDex"></label>
+            <br>
+            <label>Constitution: <input type="number" name="cCon" id="cCon"></label>
+            <br>
+            <label>Intelligence: <input type="number" name="cInt" id="cInt"></label>
+            <br>
+            <label>Wisdom: <input type="number" name="cWis" id="cWis"></label>
+            <br>
+            <label>Charisma: <input type="number" name="cCha" id="cCha"></label>
+            <br>
+            <input type="submit" value="Add Character">
+            <br>
+        </form>
+    </div>
+    {% if characters|length >= 1 %}
+    <h2 style="text-align: center;"><b><u>Your Characters:</u></b></h2>
+    <table>
+        <tr>
+            <th><b><u>Name:</u></b></th>
+            <th><b><u>Age:</u></b></th>
+            <th><b><u>Race:</u></b></th>
+            <th><b><u>Actions:</u></b></th>
+        </tr>
+        {% for character in characters %}
+            <tr>
+                <td>{{ character.cName }}</td>
+                <td>{{ character.cAge }}</td>
+                <td>{{ character.cRace }}</td>
+                <td>
+                    <a href="/updateCharacter/{{character.cID}}">Edit Character</a>
+                    <br>
+                    <a href="/deleteCharacter/{{character.cID}}">Delete Character</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+
+{% endblock %}
