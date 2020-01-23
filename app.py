@@ -140,7 +140,24 @@ def updateCharacter(id):
 
 @app.route('/weapons.html')
 def weapons():
-    return render_template('weapons.html')
+    if request.method == 'POST':
+        w_Name = request.form['wName']
+        w_Type = request.form['wType']
+        w_Damage = request.form['wDamage']
+        w_Dice = request.form['wDice']
+        w_Desc = request.form['wDesc']
+
+        new_weapon = Weapon(wName=w_Name, wType=w_Type, wDamage=w_Damage, wDice=w_Dice, wDesc=w_Desc)
+
+        try:
+            db.session.add(new_weapon)
+            db.session.commit()
+            return redirect('/weapons.html')
+        except:
+            return 'There was an issue adding your weapon to the database.'
+    else:
+        weapons = Weapon.query.order_by(Weapon.wID).all()
+        return render_template('weapons.html', weapons=weapons)
 
 @app.route('/armours.html')
 def armours():
