@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Weapons: Update Weapon</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Update your weapon below:</h1>
+
+    <div class="form">
+        <form action="/updateCharacter/{{character.cID}}" method="POST">
+            <label>Weapon Name: <input type="text" name="wName" id="wName" value="{{weapon.wName}}"></label>
+            <br>
+            <label>Weapon Type: <input type="text" name="wType" id="wType" value="{{weapon.wType}}"></label>
+            <br>
+            <label>Damage Type: <input type="text" name="wDamage" id="wDamage" value="{{weapon.wDamage}}"></label>
+            <br>
+            <label>Damage Dice: <input type="text" name="wDice" id="wDice" value="{{weapon.wDice}}"></label>
+            <br>
+            <label>Description: <input type="text" name="wDesc" id="wDesc" value="{{weapon.wDesc}}"></label>
+            <br>
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+
+</div>
+{% endblock %}

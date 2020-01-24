@@ -41,9 +41,9 @@
                 <td>{{ weapon.wDamage }}</td>
                 <td>{{ weapon.wDice }}</td>
                 <td>
-                    <a href="">Edit Weapon</a>
+                    <a href="/updateWeapon/{{weapon.wID}}">Edit Weapon</a>
                     <br>
-                    <a href="">Delete Weapon</a>
+                    <a href="/deleteWeapon/{{weapon.wID}}">Delete Weapon</a>
                 </td>
             </tr>
         {% endfor %}

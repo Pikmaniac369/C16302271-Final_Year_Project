@@ -159,6 +159,36 @@ def weapons():
         weapons = Weapon.query.order_by(Weapon.wID).all()
         return render_template('weapons.html', weapons=weapons)
 
+@app.route('/deleteWeapon/<int:id>')
+def deleteWeapon(id):
+    weapon_to_delete = Weapon.query.get_or_404(id)
+
+    try:
+        db.session.delete(weapon_to_delete)
+        db.session.commit()
+        return redirect('/weapons.html')
+    except:
+        return 'There was a problem deleting your weapon.'
+
+@app.route('/updateWeapon/<int:id>', methods=['GET', 'POST'])
+def updateWeapon(id):
+    weapon = Weapon.query.get_or_404(id)
+
+    if request.method == 'POST':
+        weapon.wName = request.form['wName']
+        weapon.wType = request.form['wType']
+        weapon.wDamage = request.form['wDamage']
+        weapon.wDice = request.form['wDice']
+        weapon.wDesc = request.form['wDesc']
+
+        try:
+            db.session.commit()
+            return redirect('/weapons.html')
+        except:
+            return 'There was a problem updating your weapon.'
+    else:
+        return render_template('updateWeapon.html', weapon=weapon)
+
 @app.route('/armours.html')
 def armours():
     return render_template('armours.html')
