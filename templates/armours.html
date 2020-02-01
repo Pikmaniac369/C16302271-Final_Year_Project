@@ -22,6 +22,30 @@
             <br>
         </form>
     </div>
+    {% if armours|length >= 1 %}
+    <h2 style="text-align: center;"><b><u>Your Armours:</u></b></h2>
+    <table>
+        <tr>
+            <th><b><u>Armour Name:</u></b></th>
+            <th><b><u>Armour Type:</u></b></th>
+            <th><b><u>Base AC:</u></b></th>
+            <th><b><u>Actions:</u></b></th>
+        </tr>
+        {% for armour in armours %}
+            <tr>
+                <td>{{ armour.aName }}</td>
+                <td>{{ armour.aType }}</td>
+                <td>{{ armour.aBase }}</td>
+                <td>
+                    <a href="/updateArmour/{{armour.aID}}">Edit Armour</a>
+                    <br>
+                    <a href="/deleteArmour/{{armour.aID}}">Delete Armour</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
 </div>
 
 {% endblock %}
