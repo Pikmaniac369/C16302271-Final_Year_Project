@@ -5,5 +5,23 @@
 {% endblock %}
 
 {% block body %}
-<h1>Hello. Welcome to the armours page!</h1>
+<div class="content">
+    <h1 style="text-align: center;">Hello. Welcome to the armours page!</h1 style="text-align: center;">
+    <h2 style="text-align: center;">Enter the details of your new weapon below:</h2>
+    <div class="form">
+        <form action="weapons.html" method="POST">
+            <label>Armour Name: <input type="text" name="aName" id="aName" required></label>
+            <br>
+            <label>Armour Type: <input type="text" name="aType" id="aType"></label>
+            <br>
+            <label>Base Armour Class: <input type="text" name="aBase" id="aBase"></label>
+            <br>
+            <label>Description: <input type="text" name="aDesc" id="aDesc"></label>
+            <br>
+            <input type="submit" value="Add Armour">
+            <br>
+        </form>
+    </div>
+</div>
+
 {% endblock %}
