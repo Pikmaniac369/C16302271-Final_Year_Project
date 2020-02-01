@@ -138,7 +138,7 @@ def updateCharacter(id):
         return render_template('updateCharacter.html', character=character)
 
 
-@app.route('/weapons.html')
+@app.route('/weapons.html', methods=['POST', 'GET'])
 def weapons():
     if request.method == 'POST':
         w_Name = request.form['wName']
@@ -189,9 +189,54 @@ def updateWeapon(id):
     else:
         return render_template('updateWeapon.html', weapon=weapon)
 
-@app.route('/armours.html')
+@app.route('/armours.html', methods=['POST', 'GET'])
 def armours():
-    return render_template('armours.html')
+    if request.method == 'POST':
+        a_Name = request.form['aName']
+        a_Type = request.form['aType']
+        a_Base = request.form['aBase']
+        a_Desc = request.form['aDesc']
+
+        new_armour = Armour(aName=a_Name, aType=a_Type, aBase=a_Base, aDesc=a_Desc)
+
+        try:
+            db.session.add(new_armour)
+            db.session.commit()
+            return redirect('/armours.html')
+        except:
+            return 'There was an issue adding your armour to the database.'
+    else:
+        armours = Armour.query.order_by(Armour.aID).all()
+        return render_template('armours.html', armours=armours)
+
+@app.route('/deleteArmour/<int:id>')
+def deleteArmour(id):
+    armour_to_delete = Armour.query.get_or_404(id)
+
+    try:
+        db.session.delete(armour_to_delete)
+        db.session.commit()
+        return redirect('/armours.html')
+    except:
+        return 'There was a problem deleting your armour.'
+
+@app.route('/updateArmour/<int:id>', methods=['GET', 'POST'])
+def updateArmour(id):
+    armour = Armour.query.get_or_404(id)
+
+    if request.method == 'POST':
+        armour.aName = request.form['aName']
+        armour.aType = request.form['aType']
+        armour.aBase = request.form['aBase']
+        armour.aDesc = request.form['aDesc']
+
+        try:
+            db.session.commit()
+            return redirect('/armours.html')
+        except:
+            return 'There was a problem updating your armour.'
+    else:
+        return render_template('updateArmour.html', armour=armour)
 
 @app.route('/locations.html')
 def locations():
