@@ -264,6 +264,33 @@ def locations():
         locations = Location.query.order_by(Location.lID).all()
         return render_template('locations.html', locations=locations)
 
+@app.route('/deleteLocation/<int:id>')
+def deleteLocation(id):
+    location_to_delete = Location.query.get_or_404(id)
+
+    try:
+        db.session.delete(location_to_delete)
+        db.session.commit()
+        return redirect('/locations.html')
+    except:
+        return 'There was a problem deleting your location.'
+
+@app.route('/updateLocation/<int:id>', methods=['GET', 'POST'])
+def updateLocation(id):
+    location = Location.query.get_or_404(id)
+
+    if request.method == 'POST':
+        location.lName = request.form['lName']
+        location.lDesc = request.form['lDesc']
+
+        try:
+            db.session.commit()
+            return redirect('/locations.html')
+        except:
+            return 'There was a problem updating your location.'
+    else:
+        return render_template('updateLocation.html', location=location)
+
 # Run the app in debug mode:
 if __name__ == "__main__":
     app.run(debug=True)
