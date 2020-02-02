@@ -4,6 +4,7 @@ from flask_login import LoginManager, UserMixin
 # Might use Flask Bootstrap
 
 app = Flask(__name__)
+# Configure the database:
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projectDB.db'
 db = SQLAlchemy(app)
 
@@ -80,6 +81,7 @@ def index():
 def dashboard():
     return render_template('dashboard.html')
 
+# Character-related functionality:
 @app.route('/characters.html', methods=['POST', 'GET'])
 def characters():
     if request.method == 'POST':
@@ -141,7 +143,7 @@ def updateCharacter(id):
     else:
         return render_template('updateCharacter.html', character=character)
 
-
+# Weapon-related functionality:
 @app.route('/weapons.html', methods=['POST', 'GET'])
 def weapons():
     if request.method == 'POST':
@@ -193,6 +195,7 @@ def updateWeapon(id):
     else:
         return render_template('updateWeapon.html', weapon=weapon)
 
+# Armour-related functionality:
 @app.route('/armours.html', methods=['POST', 'GET'])
 def armours():
     if request.method == 'POST':
@@ -242,9 +245,11 @@ def updateArmour(id):
     else:
         return render_template('updateArmour.html', armour=armour)
 
+# Location-related functionality:
 @app.route('/locations.html')
 def locations():
     return render_template('locations.html')
 
+# Run the app in debug mode:
 if __name__ == "__main__":
     app.run(debug=True)
