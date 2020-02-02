@@ -65,6 +65,7 @@ class Armour(db.Model):
         return '<Armour %r>' % self.aID
 
 # Location Table:
+# Maybe add more info, such as number of shops, list of factions, etc.
 class Location(db.Model):
     lID = db.Column(db.Integer, primary_key=True)
     lName = db.Column(db.String(100), nullable=False)
