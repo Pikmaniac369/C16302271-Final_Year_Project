@@ -5,5 +5,40 @@
 {% endblock %}
 
 {% block body %}
-<h1>Hello. Welcome to the locations page!</h1>
+<div class="content">
+    <h1 style="text-align: center;">Hello. Welcome to the locations page!</h1>
+    <h2 style="text-align: center;">Enter the details of your new location below:</h2>
+    <div class="form">
+        <form action="locations.html" method="POST">
+            <label>Location Name: <input type="text" name="lName" id="lName" required></label>
+            <label>Description: <input type="text" name="lDesc" id="lDesc"></label>
+            <br>
+            <input type="submit" value="Add Location">
+            <br>
+        </form>
+    </div>
+    {% if locations|length >= 1 %}
+    <h2 style="text-align: center;"><b><u>Your Locations:</u></b></h2>
+    <table>
+        <tr>
+            <th><b><u>Location Name:</u></b></th>
+            <th><b><u>Description:</u></b></th>
+            <th><b><u>Actions:</u></b></th>
+        </tr>
+        {% for location in locations %}
+            <tr>
+                <td>{{ location.lName }}</td>
+                <td>{{ location.lDesc }}</td>
+                <td>
+                    <a href="/updateLocation/{{location.lID}}">Edit Location</a>
+                    <br>
+                    <a href="/deleteLocation/{{location.lID}}">Delete Location</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+</div>
+
 {% endblock %}

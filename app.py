@@ -8,6 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projectDB.db'
 db = SQLAlchemy(app)
 
 '''
+# User Table:
 class User(db.Model):
     userID = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -17,7 +18,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.userID
 '''
-
+# Character Table:
 class Character(db.Model):
     cID = db.Column(db.Integer, primary_key=True)
     cName = db.Column(db.String(100), nullable=False)
@@ -36,6 +37,7 @@ class Character(db.Model):
     def __repr__(self):
         return '<Character %r>' % self.cID
 
+# Weapon Table:
 class Weapon(db.Model):
     wID = db.Column(db.Integer, primary_key=True)
     wName = db.Column(db.String(100), nullable=False)
@@ -48,6 +50,7 @@ class Weapon(db.Model):
     def __repr__(self):
         return '<Weapon %r>' % self.wID
 
+# Armour Table:
 class Armour(db.Model):
     aID = db.Column(db.Integer, primary_key=True)
     aName = db.Column(db.String(100), nullable=False)
@@ -60,6 +63,7 @@ class Armour(db.Model):
     def __repr__(self):
         return '<Armour %r>' % self.aID
 
+# Location Table:
 class Location(db.Model):
     lID = db.Column(db.Integer, primary_key=True)
     lName = db.Column(db.String(100), nullable=False)
