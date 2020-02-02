@@ -246,9 +246,23 @@ def updateArmour(id):
         return render_template('updateArmour.html', armour=armour)
 
 # Location-related functionality:
-@app.route('/locations.html')
+@app.route('/locations.html', methods=['POST', 'GET'])
 def locations():
-    return render_template('locations.html')
+    if request.method == 'POST':
+        l_Name = request.form['lName']
+        l_Desc = request.form['lDesc']
+
+        new_location = Location(lName=l_Name, lDesc=l_Desc)
+
+        try:
+            db.session.add(new_location)
+            db.session.commit()
+            return redirect('/locations.html')
+        except:
+            return 'There was an issue adding your location to the database.'
+    else:
+        locations = Location.query.order_by(Location.lID).all()
+        return render_template('locations.html', locations=locations)
 
 # Run the app in debug mode:
 if __name__ == "__main__":
