@@ -22,18 +22,19 @@ class User(db.Model):
 # Character Table:
 class Character(db.Model):
     cID = db.Column(db.Integer, primary_key=True)
-    cName = db.Column(db.String(100), nullable=False)
-    cAge = db.Column(db.Integer)
+    cName = db.Column(db.String(100), nullable=False)# Name of the character
+    cAge = db.Column(db.Integer)# Age of the character
     # Don't know how to use Enums yet. Will be implemented once I do.
-    #cGender = db.Column(db.Enum('Male', 'Female', 'Other'), default='Male')
-    cRace = db.Column(db.String(20))# Will change to a list at a later date
-    cDesc = db.Column(db.String(100000))
-    cStr = db.Column(db.Integer, default=8)
-    cDex = db.Column(db.Integer, default=8)
-    cCon = db.Column(db.Integer, default=8)
-    cInt = db.Column(db.Integer, default=8)
-    cWis = db.Column(db.Integer, default=8)
-    cCha = db.Column(db.Integer, default=8)
+    # cGender = db.Column(db.Enum('Male', 'Female', 'Other'), default='Male')
+    cRace = db.Column(db.String(20))# Will change to a list of races at a later date, i.e. Human, Elf, Dwarf, Halfling, etc.
+    # cClass = db.Column(db.String(50)) The character's class, chosen from a list.
+    cDesc = db.Column(db.String(100000))# Description of the character, i.e. appearance, backstory
+    cStr = db.Column(db.Integer, default=8)# The character's Strength stat
+    cDex = db.Column(db.Integer, default=8)# The character's Dexterity stat
+    cCon = db.Column(db.Integer, default=8)# The character's Constitution stat
+    cInt = db.Column(db.Integer, default=8)# The character's Intelligence stat
+    cWis = db.Column(db.Integer, default=8)# The character's Wisdom stat
+    cCha = db.Column(db.Integer, default=8)# The character's Charisma stat
 
     def __repr__(self):
         return '<Character %r>' % self.cID
@@ -41,12 +42,12 @@ class Character(db.Model):
 # Weapon Table:
 class Weapon(db.Model):
     wID = db.Column(db.Integer, primary_key=True)
-    wName = db.Column(db.String(100), nullable=False)
-    wType = db.Column(db.String(50))# Will change to a list of weapon types at a later time
-    wDamage = db.Column(db.String(50))# Will change to a list of damage types at a later time
-    wDice = db.Column(db.String(10))# Will change to a list of dice types at a later time
-    wDesc = db.Column(db.String(100000))
-    # Might add a boolean for 'Magical Weapon?' at a later time
+    wName = db.Column(db.String(100), nullable=False)# Name of the weapon
+    wType = db.Column(db.String(50))# Will change to a list of weapon types at a later time, i.e. simple, martial
+    wDamage = db.Column(db.String(50))# Will change to a list of damage types at a later time, i.e. bludgeoning, piercing, slashing, etc.
+    wDice = db.Column(db.String(10))# Will change to a list of dice types at a later time, i.e. d4, d6, d8, d10, d12.
+    # wMagic = db.Column(db.Boolean) Is the weapon magical.
+    wDesc = db.Column(db.String(100000))# Description of the weapon, i.e. appearance, effects, magic effects.
 
     def __repr__(self):
         return '<Weapon %r>' % self.wID
@@ -54,12 +55,13 @@ class Weapon(db.Model):
 # Armour Table:
 class Armour(db.Model):
     aID = db.Column(db.Integer, primary_key=True)
-    aName = db.Column(db.String(100), nullable=False)
-    aType = db.Column(db.String(50))# Will change to a list of armour types at a later date
-    aBase = db.Column(db.Integer)
-    # aDexYN = db.Column(db.Boolean) Does the armour use the DEX modifier
-    # aMod = db.Column(db.Integer) The maximum DEX mod to apply if it uses it
-    aDesc = db.Column(db.String(100000))
+    aName = db.Column(db.String(100), nullable=False)# Name of the armour.
+    aType = db.Column(db.String(50))# Will change to a list of armour types at a later date, i.e. light, medium, heavy.
+    aBase = db.Column(db.Integer)# Base Armour Class (AC).
+    # aDexYN = db.Column(db.Boolean) Does the armour use the DEX modifier.
+    # aMod = db.Column(db.Integer) The maximum DEX mod to apply if it uses it.
+    # aMagic = db.Column(db.Boolean) Is the armour magical.
+    aDesc = db.Column(db.String(100000))# Description of the armour, i.e. appearance, effects, magic effects.
 
     def __repr__(self):
         return '<Armour %r>' % self.aID
@@ -68,8 +70,8 @@ class Armour(db.Model):
 # Maybe add more info, such as number of shops, list of factions, etc.
 class Location(db.Model):
     lID = db.Column(db.Integer, primary_key=True)
-    lName = db.Column(db.String(100), nullable=False)
-    lDesc = db.Column(db.String(100000))
+    lName = db.Column(db.String(100), nullable=False)# Name of the location.
+    lDesc = db.Column(db.String(100000))# Description of the location.
 
     def __repr__(self):
         return '<Location %r>' % self.lID
