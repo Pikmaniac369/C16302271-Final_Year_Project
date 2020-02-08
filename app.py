@@ -24,10 +24,9 @@ class Character(db.Model):
     cID = db.Column(db.Integer, primary_key=True)
     cName = db.Column(db.String(100), nullable=False)# Name of the character
     cAge = db.Column(db.Integer)# Age of the character
-    # Don't know how to use Enums yet. Will be implemented once I do.
-    # cGender = db.Column(db.Enum('Male', 'Female', 'Other'), default='Male')
+    cGender = db.Column(db.String(20))# The character's gender
     cRace = db.Column(db.String(20))# Will change to a list of races at a later date, i.e. Human, Elf, Dwarf, Halfling, etc.
-    # cClass = db.Column(db.String(50)) The character's class, chosen from a list.
+    cClass = db.Column(db.String(50))# The character's class, chosen from a list.
     cDesc = db.Column(db.String(100000))# Description of the character, i.e. appearance, backstory
     cStr = db.Column(db.Integer, default=8)# The character's Strength stat
     cDex = db.Column(db.Integer, default=8)# The character's Dexterity stat
@@ -90,7 +89,9 @@ def characters():
     if request.method == 'POST':
         c_Name = request.form['cName']
         c_Age = request.form['cAge']
+        c_Gender = request.form['cGender']
         c_Race = request.form['cRace']
+        c_Class = request.form['cClass']
         c_Desc = request.form['cDesc']
         c_Str = request.form['cStr']
         c_Dex = request.form['cDex']
@@ -99,7 +100,7 @@ def characters():
         c_Wis = request.form['cWis']
         c_Cha = request.form['cCha']
 
-        new_character = Character(cName=c_Name, cAge=c_Age, cRace=c_Race, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
+        new_character = Character(cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
 
         try:
             db.session.add(new_character)
