@@ -130,7 +130,9 @@ def updateCharacter(id):
     if request.method == 'POST':
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
+        character.cGender = request.form['cGender']
         character.cRace = request.form['cRace']
+        character.cClass = request.form['cClass']
         character.cDesc = request.form['cDesc']
         character.cStr = request.form['cStr']
         character.cDex = request.form['cDex']
