@@ -1,9 +1,16 @@
-from flask import Flask, render_template, url_for, request, redirect
+import os
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
+from werkzeug.utils import secure_filename
 # Might use Flask Bootstrap
 
+UPLOAD_FOLDER = 'static/Images/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 app = Flask(__name__)
+# Configure the upload folder:
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Configure the database:
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projectDB.db'
 db = SQLAlchemy(app)
@@ -22,6 +29,7 @@ class User(db.Model):
 # Character Table:
 class Character(db.Model):
     cID = db.Column(db.Integer, primary_key=True)
+    cPicPath = db.Column(db.String(100000))# The path to the character photo in the images directory
     cName = db.Column(db.String(100), nullable=False)# Name of the character
     cAge = db.Column(db.Integer)# Age of the character
     cGender = db.Column(db.String(20))# The character's gender
@@ -75,6 +83,10 @@ class Location(db.Model):
     def __repr__(self):
         return '<Location %r>' % self.lID
 
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -87,6 +99,7 @@ def dashboard():
 @app.route('/characters.html', methods=['POST', 'GET'])
 def characters():
     if request.method == 'POST':
+        c_Pic = request.files['cPic']
         c_Name = request.form['cName']
         c_Age = request.form['cAge']
         c_Gender = request.form['cGender']
@@ -100,7 +113,13 @@ def characters():
         c_Wis = request.form['cWis']
         c_Cha = request.form['cCha']
 
-        new_character = Character(cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
+        filename = secure_filename(c_Pic.filename)
+        c_Pic_Path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        if c_Pic and allowed_file(c_Pic.filename):
+            c_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        new_character = Character(cPicPath=c_Pic_Path, cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
 
         try:
             db.session.add(new_character)
