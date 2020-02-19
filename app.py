@@ -49,6 +49,7 @@ class Character(db.Model):
 # Weapon Table:
 class Weapon(db.Model):
     wID = db.Column(db.Integer, primary_key=True)
+    wPicPath = db.Column(db.String(100000))# The path to the weapon picture in the images directory
     wName = db.Column(db.String(100), nullable=False)# Name of the weapon
     wType = db.Column(db.String(50))# Will change to a list of weapon types at a later time, i.e. simple, martial
     wDamage = db.Column(db.String(50))# Will change to a list of damage types at a later time, i.e. bludgeoning, piercing, slashing, etc.
@@ -172,13 +173,20 @@ def updateCharacter(id):
 @app.route('/weapons.html', methods=['POST', 'GET'])
 def weapons():
     if request.method == 'POST':
+        w_Pic = request.files['wPic']
         w_Name = request.form['wName']
         w_Type = request.form['wType']
         w_Damage = request.form['wDamage']
         w_Dice = request.form['wDice']
         w_Desc = request.form['wDesc']
 
-        new_weapon = Weapon(wName=w_Name, wType=w_Type, wDamage=w_Damage, wDice=w_Dice, wDesc=w_Desc)
+        filename = secure_filename(w_Pic.filename)
+        w_Pic_Path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        if w_Pic and allowed_file(w_Pic.filename):
+            w_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        new_weapon = Weapon(wPicPath=w_Pic_Path, wName=w_Name, wType=w_Type, wDamage=w_Damage, wDice=w_Dice, wDesc=w_Desc)
 
         try:
             db.session.add(new_weapon)

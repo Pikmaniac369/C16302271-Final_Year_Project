@@ -9,14 +9,29 @@
     <h1 style="text-align: center;">Hello. Welcome to the weapons page!</h1>
     <h2 style="text-align: center;">Enter the details of your new weapon below:</h2>
     <div class="form">
-        <form action="weapons.html" method="POST">
+        <form action="weapons.html" method="POST" enctype="multipart/form-data">
+            <label>Reference Picture: <input type="file" name="wPic" id="wPic"></label>
+            <br>
             <label>Weapon Name: <input type="text" name="wName" id="wName" required></label>
             <br>
-            <label>Weapon Type: <input type="text" name="wType" id="wType"></label>
+            <label>Weapon Type: <select name="wType" id="wType">
+                <option>Simple</option>
+                <option>Martial</option>
+            </select></label>
             <br>
-            <label>Damage Type: <input type="text" name="wDamage" id="wDamage"></label>
+            <label>Damage Type: <select name="wDamage" id="wDamage">
+                <option>Bludgeoning</option>
+                <option>Piercing</option>
+                <option>Slashing</option>
+            </select></label>
             <br>
-            <label>Damage Dice: <input type="text" name="wDice" id="wDice"></label>
+            <label>Damage Dice: <select name="wDice" id="wDice">
+                <option>d4</option>
+                <option>d6</option>
+                <option>d8</option>
+                <option>d10</option>
+                <option>d12</option>
+            </select></label>
             <br>
             <label>Description: <input type="text" name="wDesc" id="wDesc"></label>
             <br>
@@ -28,6 +43,7 @@
     <h2 style="text-align: center;"><b><u>Your Weapons:</u></b></h2>
     <table>
         <tr>
+            <th><b><u>Weapon Picture:</u></b></th>
             <th><b><u>Weapon Name:</u></b></th>
             <th><b><u>Weapon Type:</u></b></th>
             <th><b><u>Damage Type:</u></b></th>
@@ -36,6 +52,7 @@
         </tr>
         {% for weapon in weapons %}
             <tr>
+                <td><img src="{{ weapon.wPicPath }}" alt="ref-img"></td>
                 <td>{{ weapon.wName }}</td>
                 <td>{{ weapon.wType }}</td>
                 <td>{{ weapon.wDamage }}</td>
