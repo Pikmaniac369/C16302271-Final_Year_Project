@@ -148,6 +148,10 @@ def updateCharacter(id):
     character = Character.query.get_or_404(id)
 
     if request.method == 'POST':
+        c_Pic = request.files['cPic']
+        filename = secure_filename(c_Pic.filename)
+
+        character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
         character.cGender = request.form['cGender']
