@@ -226,8 +226,6 @@ def updateWeapon(id):
 
         if w_Pic and allowed_file(w_Pic.filename):
             w_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        else:
-            return 'The picture you attempted to upload was not in the correct format.'
 
         weapon.wPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         weapon.wName = request.form['wName']
