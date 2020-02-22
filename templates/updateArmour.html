@@ -12,7 +12,25 @@
         <form action="/updateArmour/{{armour.aID}}" method="POST">
             <label>Armour Name: <input type="text" name="aName" id="aName" value="{{armour.aName}}"></label>
             <br>
-            <label>Armour Type: <input type="text" name="aType" id="aType" value="{{armour.aType}}"></label>
+            <label>Armour Type: <select name="aType" id="aType">
+                {% if armour.aType == "Light Armour" %}
+                    <option value="Light Armour" selected>Light Armour</option>
+                {% else %}
+                    <option value="Light Armour">Light Armour</option>
+                {% endif %}
+
+                {% if armour.aType == "Medium Armour" %}
+                    <option value="Medium Armour" selected>Medium Armour</option>
+                {% else %}
+                    <option value="Medium Armour">Medium Armour</option>
+                {% endif %}
+
+                {% if armour.aType == "Heavy Armour" %}
+                    <option value="Heavy Armour" selected>Heavy Armour</option>
+                {% else %}
+                    <option value="Heavy Armour">Heavy Armour</option>
+                {% endif %}
+            </select></label>
             <br>
             <label>Base AC: <input type="text" name="aBase" id="aBase" value="{{armour.aBase}}"></label>
             <br>
