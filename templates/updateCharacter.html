@@ -10,7 +10,7 @@
 
     <div class="form">
         <form action="/updateCharacter/{{character.cID}}" method="POST" enctype="multipart/form-data">
-            <label>Reference Image: <img src="{{ character.cPicPath }}" alt="ref-img"></label>
+            <label>Reference Image: <img src="../{{ character.cPicPath }}" alt="ref-img"></label>
             <input type="file" name="cPic" id="cPic" value="Change Picture">
             <br>
             <label>Name: </label><input type="text" name="cName" id="cName" value="{{character.cName}}">

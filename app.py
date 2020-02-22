@@ -151,6 +151,9 @@ def updateCharacter(id):
         c_Pic = request.files['cPic']
         filename = secure_filename(c_Pic.filename)
 
+        if c_Pic and allowed_file(c_Pic.filename):
+            c_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
         character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
@@ -218,6 +221,15 @@ def updateWeapon(id):
     weapon = Weapon.query.get_or_404(id)
 
     if request.method == 'POST':
+        w_Pic = request.files['wPic']
+        filename = secure_filename(w_Pic.filename)
+
+        if w_Pic and allowed_file(w_Pic.filename):
+            w_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            return 'The picture you attempted to upload was not in the correct format.'
+
+        weapon.wPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         weapon.wName = request.form['wName']
         weapon.wType = request.form['wType']
         weapon.wDamage = request.form['wDamage']
