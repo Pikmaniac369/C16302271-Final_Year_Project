@@ -3,12 +3,15 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from werkzeug.utils import secure_filename
+from flask_bootstrap import Bootstrap
 # Might use Flask Bootstrap
 
 UPLOAD_FOLDER = 'static/Images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+# Install the Bootstrap extension
+Bootstrap(app)
 # Configure the upload folder:
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Configure the database:
