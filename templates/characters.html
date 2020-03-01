@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+{{super()}}
 <title>Characters</title>
 {% endblock %}
 
@@ -11,86 +12,133 @@
     <h2 style="text-align: center;">Enter your character's details below:</h2>
     <div class="form">
         <form action="characters.html" method="POST" enctype="multipart/form-data">
-            <label>Reference Picture: <input type="file" name="cPic" id="cPic"></label>
-            <br>
-            <label>Name: <input type="text" name="cName" id="cName" required></label>
-            <br>
-            <label>Age: <input type="number" name="cAge" id="cAge"></label>
-            <br>
-            <label>Gender:<select name="cGender" id="cGender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select></label>
-            <br>
-            <label>Race: <select name="cRace" id="cRace">
-                <option value="Dragonborn">Dragonborn</option>
-                <option value="Dwarf">Dwarf</option>
-                <option value="Elf">Elf</option>
-                <option value="Gnome">Gnome</option>
-                <option value="Half-Elf">Half-Elf</option>
-                <option value="Halfling">Halfling</option>
-                <option value="Half-Orc">Half-Orc</option>
-                <option value="Human">Human</option>
-                <option value="Tiefling">Tiefling</option>
-            </select></label>
-            <br>
-            <label>Class: <select name="cClass" id="cClass">
-                <option value="Barbarian">Barbarian</option>
-                <option value="Bard">Bard</option>
-                <option value="Cleric">Cleric</option>
-                <option value="Druid">Druid</option>
-                <option value="Fighter">Fighter</option>
-                <option value="Monk">Monk</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Ranger">Ranger</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Sorcerer">Sorcerer</option>
-                <option value="Warlock">Warlock</option>
-                <option value="Wizard">Wizard</option>
-            </select></label>
-            <br>
-            <label>Description/Backstory: <input type="text" name="cDesc" id="cDesc"></label>
-            <br>
-            <label>Strength: <input type="number" name="cStr" id="cStr"></label>
-            <br>
-            <label>Dexterity: <input type="number" name="cDex" id="cDex"></label>
-            <br>
-            <label>Constitution: <input type="number" name="cCon" id="cCon"></label>
-            <br>
-            <label>Intelligence: <input type="number" name="cInt" id="cInt"></label>
-            <br>
-            <label>Wisdom: <input type="number" name="cWis" id="cWis"></label>
-            <br>
-            <label>Charisma: <input type="number" name="cCha" id="cCha"></label>
-            <br>
-            <input type="submit" value="Add Character">
-            <br>
+            <div class="form-group">
+                <label for="cPic">Reference Picture: </label>
+                <input type="file" name="cPic" class="form-control-file" id="cPic">
+            </div>
+            
+            <div class="form-group">
+                <label for="cName">Name: </label>
+                <input type="text" name="cName" class="form-control" id="cName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cAge">Age: </label>
+                <input type="number" name="cAge" class="form-control" id="cAge">
+            </div>
+            
+            <div class="form-group">
+                <label for="cGender">Gender: </label>
+                <select name="cGender" class="form-control" id="cGender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cRace">Race: </label>
+                <select name="cRace" class="form-control" id="cRace">
+                    <option value="Dragonborn">Dragonborn</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Gnome">Gnome</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Half-Orc">Half-Orc</option>
+                    <option value="Human">Human</option>
+                    <option value="Tiefling">Tiefling</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cClass">Class: </label>
+                <select name="cClass" class="form-control" id="cClass">
+                    <option value="Barbarian">Barbarian</option>
+                    <option value="Bard">Bard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Monk">Monk</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Rogue">Rogue</option>
+                    <option value="Sorcerer">Sorcerer</option>
+                    <option value="Warlock">Warlock</option>
+                    <option value="Wizard">Wizard</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cDesc">Description/Backstory: </label>
+                <input type="text" name="cDesc" class="form-control" id="cDesc">
+            </div>
+
+            <div class="form-group">
+                <label for="cStr">Strength: </label>
+                <input type="number" name="cStr" class="form-control" id="cStr">
+            </div>
+            
+            <div class="form-group">
+                <label for="cDex">Dexterity: </label>
+                <input type="number" name="cDex" class="form-control" id="cDex">
+            </div>
+            
+            <div class="form-group">
+                <label for="cCon">Constitution: </label>
+                <input type="number" name="cCon" class="form-control" id="cCon">
+            </div>
+
+            <div class="form-group">
+                <label for="cInt">Intelligence: </label>
+                <input type="number" name="cInt" class="form-control" id="cInt">
+            </div>
+            
+            <div class="form-group">
+                <label for="cWis">Wisdom: </label>
+                <input type="number" name="cWis" class="form-control" id="cWis">
+            </div>
+            
+            <div class="form-group">
+                <label for="cCha">Charisma: </label>
+                <input type="number" name="cCha" class="form-control" id="cCha">
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary">Add Character</button>
+            
         </form>
     </div>
     {% if characters|length >= 1 %}
     <h2 style="text-align: center;"><b><u>Your Characters:</u></b></h2>
-    <table>
-        <tr>
-            <th><b><u>Reference Image:</u></b></th>
-            <th><b><u>Name:</u></b></th>
-            <th><b><u>Age:</u></b></th>
-            <th><b><u>Race:</u></b></th>
-            <th><b><u>Actions:</u></b></th>
-        </tr>
-        {% for character in characters %}
+    <table class="table table-bordered table-sm">
+        <thead class="thead-light">
             <tr>
-                <td><img src="{{ character.cPicPath }}" alt="ref-img"></td>
-                <td>{{ character.cName }}</td>
-                <td>{{ character.cAge }}</td>
-                <td>{{ character.cRace }}</td>
-                <td>
-                    <a href="/updateCharacter/{{character.cID}}">Edit Character</a>
-                    <br>
-                    <a href="/deleteCharacter/{{character.cID}}">Delete Character</a>
-                </td>
+                <th scope="col"></th>
+                <th scope="col"><b><u>Reference Image:</u></b></th>
+                <th scope="col"><b><u>Name:</u></b></th>
+                <th scope="col"><b><u>Age:</u></b></th>
+                <th scope="col"><b><u>Race:</u></b></th>
+                <th scope="col"><b><u>Actions:</u></b></th>
             </tr>
-        {% endfor %}
+        </thead>
+
+        <tbody>
+            {% for character in characters %}
+                <tr>
+                    <th scope="row"></th>
+                    <td class="w-25"><img src="{{ character.cPicPath }}" alt="ref-img" class="img-fluid"></td>
+                    <td>{{ character.cName }}</td>
+                    <td>{{ character.cAge }}</td>
+                    <td>{{ character.cRace }}</td>
+                    <td>
+                        <a href="/updateCharacter/{{character.cID}}">Edit Character</a>
+                        <br>
+                        <a href="/deleteCharacter/{{character.cID}}">Delete Character</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% endif %}
 </div>
