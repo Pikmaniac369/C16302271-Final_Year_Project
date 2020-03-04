@@ -12,62 +12,71 @@
     <h2 style="text-align: center;">Enter your character's details below:</h2>
     <div class="form">
         <form action="characters.html" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="cPic">Reference Picture: </label>
-                <input type="file" name="cPic" class="form-control-file" id="cPic">
+            
+            
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cPic">Reference Picture: </label>
+                    <input type="file" name="cPic" class="form-control-file" id="cPic">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cName">Name: </label>
+                    <input type="text" name="cName" class="form-control" id="cName" required>
+                </div>
+            
+                <div class="form-group col-md-4">
+                    <label for="cAge">Age: </label>
+                    <input type="number" name="cAge" class="form-control" id="cAge">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cGender">Gender: </label>
+                    <select name="cGender" class="form-control" id="cGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="cRace">Race: </label>
+                    <select name="cRace" class="form-control" id="cRace">
+                        <option value="Dragonborn">Dragonborn</option>
+                        <option value="Dwarf">Dwarf</option>
+                        <option value="Elf">Elf</option>
+                        <option value="Gnome">Gnome</option>
+                        <option value="Half-Elf">Half-Elf</option>
+                        <option value="Halfling">Halfling</option>
+                        <option value="Half-Orc">Half-Orc</option>
+                        <option value="Human">Human</option>
+                        <option value="Tiefling">Tiefling</option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="cClass">Class: </label>
+                    <select name="cClass" class="form-control" id="cClass">
+                        <option value="Barbarian">Barbarian</option>
+                        <option value="Bard">Bard</option>
+                        <option value="Cleric">Cleric</option>
+                        <option value="Druid">Druid</option>
+                        <option value="Fighter">Fighter</option>
+                        <option value="Monk">Monk</option>
+                        <option value="Paladin">Paladin</option>
+                        <option value="Ranger">Ranger</option>
+                        <option value="Rogue">Rogue</option>
+                        <option value="Sorcerer">Sorcerer</option>
+                        <option value="Warlock">Warlock</option>
+                        <option value="Wizard">Wizard</option>
+                    </select>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label for="cName">Name: </label>
-                <input type="text" name="cName" class="form-control" id="cName" required>
-            </div>
             
-            <div class="form-group">
-                <label for="cAge">Age: </label>
-                <input type="number" name="cAge" class="form-control" id="cAge">
-            </div>
-            
-            <div class="form-group">
-                <label for="cGender">Gender: </label>
-                <select name="cGender" class="form-control" id="cGender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="cRace">Race: </label>
-                <select name="cRace" class="form-control" id="cRace">
-                    <option value="Dragonborn">Dragonborn</option>
-                    <option value="Dwarf">Dwarf</option>
-                    <option value="Elf">Elf</option>
-                    <option value="Gnome">Gnome</option>
-                    <option value="Half-Elf">Half-Elf</option>
-                    <option value="Halfling">Halfling</option>
-                    <option value="Half-Orc">Half-Orc</option>
-                    <option value="Human">Human</option>
-                    <option value="Tiefling">Tiefling</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="cClass">Class: </label>
-                <select name="cClass" class="form-control" id="cClass">
-                    <option value="Barbarian">Barbarian</option>
-                    <option value="Bard">Bard</option>
-                    <option value="Cleric">Cleric</option>
-                    <option value="Druid">Druid</option>
-                    <option value="Fighter">Fighter</option>
-                    <option value="Monk">Monk</option>
-                    <option value="Paladin">Paladin</option>
-                    <option value="Ranger">Ranger</option>
-                    <option value="Rogue">Rogue</option>
-                    <option value="Sorcerer">Sorcerer</option>
-                    <option value="Warlock">Warlock</option>
-                    <option value="Wizard">Wizard</option>
-                </select>
-            </div>
             
             <div class="form-group">
                 <label for="cDesc">Description/Backstory: </label>
@@ -112,7 +121,7 @@
     {% if characters|length >= 1 %}
     <h2 style="text-align: center;"><b><u>Your Characters:</u></b></h2>
     <table class="table table-bordered table-sm">
-        <thead class="thead-light">
+        <thead class="thead">
             <tr>
                 <th scope="col"></th>
                 <th scope="col"><b><u>Reference Image:</u></b></th>

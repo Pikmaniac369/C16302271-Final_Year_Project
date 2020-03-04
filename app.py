@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
 # Might use Flask Bootstrap
 
-UPLOAD_FOLDER = 'static/Images/'
+UPLOAD_FOLDER = 'static/User_Images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
