@@ -7,9 +7,9 @@
 
 {% block content %}
 <div class="content">
-    <h1 style="text-align: center;">Hello. Welcome to the characters page!</h1>
+    <h1>Hello. Welcome to the characters page!</h1>
     <button id="characterDashboardButton" onclick="window.location.href = './dashboard.html';">Home</button>
-    <h2 style="text-align: center;">Enter your character's details below:</h2>
+    <h2>Enter your character's details below:</h2>
     <div class="form">
         <form action="characters.html" method="POST" enctype="multipart/form-data">
             
@@ -76,50 +76,49 @@
                 </div>
             </div>
             
-            
-            
             <div class="form-group">
                 <label for="cDesc">Description/Backstory: </label>
                 <input type="text" name="cDesc" class="form-control" id="cDesc">
             </div>
 
-            <div class="form-group">
-                <label for="cStr">Strength: </label>
-                <input type="number" name="cStr" class="form-control" id="cStr">
-            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="cStr">Strength: </label>
+                    <input type="number" name="cStr" class="form-control" id="cStr">
+                </div>
             
-            <div class="form-group">
-                <label for="cDex">Dexterity: </label>
-                <input type="number" name="cDex" class="form-control" id="cDex">
-            </div>
-            
-            <div class="form-group">
-                <label for="cCon">Constitution: </label>
-                <input type="number" name="cCon" class="form-control" id="cCon">
-            </div>
+                <div class="form-group col-md-2">
+                    <label for="cDex">Dexterity: </label>
+                    <input type="number" name="cDex" class="form-control" id="cDex">
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label for="cCon">Constitution: </label>
+                    <input type="number" name="cCon" class="form-control" id="cCon">
+                </div>
 
-            <div class="form-group">
-                <label for="cInt">Intelligence: </label>
-                <input type="number" name="cInt" class="form-control" id="cInt">
+                <div class="form-group col-md-2">
+                    <label for="cInt">Intelligence: </label>
+                    <input type="number" name="cInt" class="form-control" id="cInt">
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label for="cWis">Wisdom: </label>
+                    <input type="number" name="cWis" class="form-control" id="cWis">
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label for="cCha">Charisma: </label>
+                    <input type="number" name="cCha" class="form-control" id="cCha">
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="cWis">Wisdom: </label>
-                <input type="number" name="cWis" class="form-control" id="cWis">
-            </div>
-            
-            <div class="form-group">
-                <label for="cCha">Charisma: </label>
-                <input type="number" name="cCha" class="form-control" id="cCha">
-            </div>
-            
             
             <button type="submit" class="btn btn-primary">Add Character</button>
             
         </form>
     </div>
     {% if characters|length >= 1 %}
-    <h2 style="text-align: center;"><b><u>Your Characters:</u></b></h2>
+    <h2><b><u>Your Characters:</u></b></h2>
     <table class="table table-bordered table-sm">
         <thead class="thead">
             <tr>
