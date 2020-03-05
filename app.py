@@ -157,7 +157,11 @@ def updateCharacter(id):
         if c_Pic and allowed_file(c_Pic.filename):
             c_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if c_Pic.filename == "":
+            character.cPicPath = character.cPicPath
+        else:
+            character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
         character.cGender = request.form['cGender']

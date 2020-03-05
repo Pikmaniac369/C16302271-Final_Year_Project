@@ -10,182 +10,225 @@
 
     <div class="form">
         <form action="/updateCharacter/{{character.cID}}" method="POST" enctype="multipart/form-data">
-            <label>Reference Image: <img src="../{{ character.cPicPath }}" alt="ref-img"></label>
-            <input type="file" name="cPic" id="cPic" value="Change Picture">
-            <br>
-            <label>Name: </label><input type="text" name="cName" id="cName" value="{{character.cName}}">
-            <br>
-            <label>Age: </label><input type="number" name="cAge" id="cAge" value="{{character.cAge}}">
-            <br>
-            <label>Gender:<select name="cGender" id="cGender">
-                {% if character.cGender == "Male" %}
-                    <option value="Male" selected>Male</option>
-                {% else %}
-                    <option value="Male">Male</option>
-                {% endif %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cPic">Reference Image: </label>
+                    <img src="../{{ character.cPicPath }}" alt="ref-img" class="w-25 img-fluid">
+                    <input type="file" name="cPic" id="cPic" class="form-control-file" value="Change Picture">
+                </div>
 
-                {% if character.cGender == "Female" %}
-                    <option value="Female" selected>Female</option>
-                {% else %}
-                    <option value="Female">Female</option>
-                {% endif %}
-
-                {% if character.cGender == "Other" %}
-                    <option value="Other" selected>Other</option>
-                {% else %}
-                    <option value="Other">Other</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Race: <select name="cRace" id="cRace">
-                {% if character.cRace == "Dragonborn" %}
-                    <option value="Dragonborn" selected>Dragonborn</option>
-                {% else %}
-                    <option value="Dragonborn">Dragonborn</option>
-                {% endif %}
-
-                {% if character.cRace == "Dwarf" %}
-                    <option value="Dwarf" selected>Dwarf</option>
-                {% else %}
-                    <option value="Dwarf">Dwarf</option>
-                {% endif %}
-
-                {% if character.cRace == "Elf" %}
-                    <option value="Elf" selected>Elf</option>
-                {% else %}
-                    <option value="Elf">Elf</option>
-                {% endif %}
+                <div class="form-group col-md-4">
+                    <label for="cName">Name: </label>
+                    <input type="text" name="cName" id="cName" class="form-control" value="{{character.cName}}">
+                </div>
                 
-                {% if character.cRace == "Gnome" %}
-                    <option value="Gnome" selected>Gnome</option>
-                {% else %}
-                    <option value="Gnome">Gnome</option>
-                {% endif %}
+                <div class="form-group col-md-4">
+                    <label for="cAge">Age: </label>
+                    <input type="number" name="cAge" id="cAge" class="form-control" value="{{character.cAge}}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cGender">Gender:</label>
+                    <select name="cGender" id="cGender" class="form-control">
+                        {% if character.cGender == "Male" %}
+                            <option value="Male" selected>Male</option>
+                        {% else %}
+                            <option value="Male">Male</option>
+                        {% endif %}
+
+                        {% if character.cGender == "Female" %}
+                            <option value="Female" selected>Female</option>
+                        {% else %}
+                            <option value="Female">Female</option>
+                        {% endif %}
+
+                        {% if character.cGender == "Other" %}
+                            <option value="Other" selected>Other</option>
+                        {% else %}
+                            <option value="Other">Other</option>
+                        {% endif %}
+                    </select>
+                </div>
                 
-                {% if character.cRace == "Half-Elf" %}
-                    <option value="Half-Elf" selected>Half-Elf</option>
-                {% else %}
-                    <option value="Half-Elf">Half-Elf</option>
-                {% endif %}
+                <div class="form-group col-md-4">
+                    <label for="cRace">Race: </label>
+                    <select name="cRace" id="cRace" class="form-control">
+                        {% if character.cRace == "Dragonborn" %}
+                            <option value="Dragonborn" selected>Dragonborn</option>
+                        {% else %}
+                            <option value="Dragonborn">Dragonborn</option>
+                        {% endif %}
+
+                        {% if character.cRace == "Dwarf" %}
+                            <option value="Dwarf" selected>Dwarf</option>
+                        {% else %}
+                            <option value="Dwarf">Dwarf</option>
+                        {% endif %}
+
+                        {% if character.cRace == "Elf" %}
+                            <option value="Elf" selected>Elf</option>
+                        {% else %}
+                            <option value="Elf">Elf</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Gnome" %}
+                            <option value="Gnome" selected>Gnome</option>
+                        {% else %}
+                            <option value="Gnome">Gnome</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Half-Elf" %}
+                            <option value="Half-Elf" selected>Half-Elf</option>
+                        {% else %}
+                            <option value="Half-Elf">Half-Elf</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Halfling" %}
+                            <option value="Halfling" selected>Halfling</option>
+                        {% else %}
+                            <option value="Halfling">Halfling</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Half-Orc" %}
+                            <option value="Half-Orc" selected>Half-Orc</option>
+                        {% else %}
+                            <option value="Half-Orc">Half-Orc</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Human" %}
+                            <option value="Human" selected>Human</option>
+                        {% else %}
+                            <option value="Human">Human</option>
+                        {% endif %}
+                        
+                        {% if character.cRace == "Tiefling" %}
+                            <option value="Tiefling" selected>Tiefling</option>
+                        {% else %}
+                            <option value="Tiefling">Tiefling</option>
+                        {% endif %}
+                    </select>
+                </div>
                 
-                {% if character.cRace == "Halfling" %}
-                    <option value="Halfling" selected>Halfling</option>
-                {% else %}
-                    <option value="Halfling">Halfling</option>
-                {% endif %}
-                
-                {% if character.cRace == "Half-Orc" %}
-                    <option value="Half-Orc" selected>Half-Orc</option>
-                {% else %}
-                    <option value="Half-Orc">Half-Orc</option>
-                {% endif %}
-                
-                {% if character.cRace == "Human" %}
-                    <option value="Human" selected>Human</option>
-                {% else %}
-                    <option value="Human">Human</option>
-                {% endif %}
-                
-                {% if character.cRace == "Tiefling" %}
-                    <option value="Tiefling" selected>Tiefling</option>
-                {% else %}
-                    <option value="Tiefling">Tiefling</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Class: <select name="cClass" id="cClass">
-                {% if character.cClass == "Barbarian" %}
-                    <option value="Barbarian" selected>Barbarian</option>
-                {% else %}
-                    <option value="Barbarian">Barbarian</option>
-                {% endif %}
+                <div class="form-group col-md-4">
+                    <label for="cClass">Class: </label>
+                    <select name="cClass" id="cClass" class="form-control">
+                        {% if character.cClass == "Barbarian" %}
+                            <option value="Barbarian" selected>Barbarian</option>
+                        {% else %}
+                            <option value="Barbarian">Barbarian</option>
+                        {% endif %}
 
-                {% if character.cClass == "Bard" %}
-                    <option value="Bard" selected>Bard</option>
-                {% else %}
-                    <option value="Bard">Bard</option>
-                {% endif %}
+                        {% if character.cClass == "Bard" %}
+                            <option value="Bard" selected>Bard</option>
+                        {% else %}
+                            <option value="Bard">Bard</option>
+                        {% endif %}
 
-                {% if character.cClass == "Cleric" %}
-                    <option value="Cleric" selected>Cleric</option>
-                {% else %}
-                    <option value="Cleric">Cleric</option>
-                {% endif %}
+                        {% if character.cClass == "Cleric" %}
+                            <option value="Cleric" selected>Cleric</option>
+                        {% else %}
+                            <option value="Cleric">Cleric</option>
+                        {% endif %}
 
-                {% if character.cClass == "Druid" %}
-                    <option value="Druid" selected>Druid</option>
-                {% else %}
-                    <option value="Druid">Druid</option>
-                {% endif %}
+                        {% if character.cClass == "Druid" %}
+                            <option value="Druid" selected>Druid</option>
+                        {% else %}
+                            <option value="Druid">Druid</option>
+                        {% endif %}
 
-                {% if character.cClass == "Fighter" %}
-                    <option value="Fighter" selected>Fighter</option>
-                {% else %}
-                    <option value="Fighter">Fighter</option>
-                {% endif %}
+                        {% if character.cClass == "Fighter" %}
+                            <option value="Fighter" selected>Fighter</option>
+                        {% else %}
+                            <option value="Fighter">Fighter</option>
+                        {% endif %}
 
-                {% if character.cClass == "Monk" %}
-                <option value="Monk" selected>Monk</option>
-                {% else %}
-                <option value="Monk">Monk</option>
-                {% endif %}
+                        {% if character.cClass == "Monk" %}
+                            <option value="Monk" selected>Monk</option>
+                        {% else %}
+                            <option value="Monk">Monk</option>
+                        {% endif %}
 
-                {% if character.cClass == "Paladin" %}
-                <option value="Paladin" selected>Paladin</option>
-                {% else %}
-                <option value="Paladin">Paladin</option>
-                {% endif %}
+                        {% if character.cClass == "Paladin" %}
+                            <option value="Paladin" selected>Paladin</option>
+                        {% else %}
+                            <option value="Paladin">Paladin</option>
+                        {% endif %}
+                        
+                        {% if character.cClass == "Ranger" %}
+                            <option value="Ranger" selected>Ranger</option>
+                        {% else %}
+                            <option value="Ranger">Ranger</option>
+                        {% endif %}
 
-                {% if character.cClass == "Ranger" %}
-                    <option value="Ranger" selected>Ranger</option>
-                {% else %}
-                    <option value="Ranger">Ranger</option>
-                {% endif %}
+                        {% if character.cClass == "Rogue" %}
+                            <option value="Rogue" selected>Rogue</option>
+                        {% else %}
+                            <option value="Rogue">Rogue</option>
+                        {% endif %}
 
-                {% if character.cClass == "Rogue" %}
-                    <option value="Rogue" selected>Rogue</option>
-                {% else %}
-                    <option value="Rogue">Rogue</option>
-                {% endif %}
+                        {% if character.cClass == "Sorcerer" %}
+                            <option value="Sorcerer" selected>Sorcerer</option>
+                        {% else %}
+                            <option value="Sorcerer">Sorcerer</option>
+                        {% endif %}
 
-                {% if character.cClass == "Sorcerer" %}
-                    <option value="Sorcerer" selected>Sorcerer</option>
-                {% else %}
-                    <option value="Sorcerer">Sorcerer</option>
-                {% endif %}
+                        {% if character.cClass == "Warlock" %}
+                            <option value="Warlock" selected>Warlock</option>
+                        {% else %}
+                            <option value="Warlock">Warlock</option>
+                        {% endif %}
 
-                {% if character.cClass == "Warlock" %}
-                    <option value="Warlock" selected>Warlock</option>
-                {% else %}
-                    <option value="Warlock">Warlock</option>
-                {% endif %}
+                        {% if character.cClass == "Wizard" %}
+                            <option value="Wizard" selected>Wizard</option>
+                        {% else %}
+                            <option value="Wizard">Wizard</option>
+                        {% endif %}
 
-                {% if character.cClass == "Wizard" %}
-                    <option value="Wizard" selected>Wizard</option>
-                {% else %}
-                    <option value="Wizard">Wizard</option>
-                {% endif %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="cDesc">Description/Backstory: </label>
+                <input type="text" name="cDesc" id="cDesc" class="form-control" value="{{character.cDesc}}">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="cStr">Strength: </label>
+                    <input type="number" name="cStr" id="cStr" class="form-control" value="{{character.cStr}}">
+                </div>
+            
+                <div class="form-group col-md-2">
+                    <label for="cDex">Dexterity: </label>
+                    <input type="number" name="cDex" id="cDex" class="form-control" value="{{character.cDex}}">
+                </div>
 
+                <div class="form-group col-md-2">
+                    <label for="cCon">Constitution: </label>
+                    <input type="number" name="cCon" id="cCon" class="form-control" value="{{character.cCon}}">
+                </div>
 
-            </select></label>
-            <br>
-            <label>Description/Backstory: </label><input type="text" name="cDesc" id="cDesc" value="{{character.cDesc}}">
-            <br>
-            <label>Strength: </label><input type="number" name="cStr" id="cStr" value="{{character.cStr}}">
-            <br>
-            <label>Dexterity: </label><input type="number" name="cDex" id="cDex" value="{{character.cDex}}">
-            <br>
-            <label>Constitution: </label><input type="number" name="cCon" id="cCon" value="{{character.cCon}}">
-            <br>
-            <label>Intelligence: </label><input type="number" name="cInt" id="cInt" value="{{character.cInt}}">
-            <br>
-            <label>Wisdom: </label><input type="number" name="cWis" id="cWis" value="{{character.cWis}}">
-            <br>
-            <label>Charisma: </label><input type="number" name="cCha" id="cCha" value="{{character.cCha}}">
-            <br>
-            <input type="submit" value="Save Changes">
+                <div class="form-group col-md-2">
+                    <label for="cInt">Intelligence: </label>
+                    <input type="number" name="cInt" id="cInt" class="form-control" value="{{character.cInt}}">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cWis">Wisdom: </label>
+                    <input type="number" name="cWis" id="cWis" class="form-control" value="{{character.cWis}}">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cCha">Charisma: </label>
+                    <input type="number" name="cCha" id="cCha" class="form-control" value="{{character.cCha}}">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
-
 </div>
 {% endblock %}
