@@ -11,33 +11,46 @@
 
     <div class="form">
         <form action="/updateArmour/{{armour.aID}}" method="POST">
-            <label>Armour Name: <input type="text" name="aName" id="aName" value="{{armour.aName}}"></label>
-            <br>
-            <label>Armour Type: <select name="aType" id="aType">
-                {% if armour.aType == "Light Armour" %}
-                    <option value="Light Armour" selected>Light Armour</option>
-                {% else %}
-                    <option value="Light Armour">Light Armour</option>
-                {% endif %}
+            
+            <div class="form-group">
+                <label>Armour Name: </label>
+                <input type="text" name="aName" class="form-control" id="aName" value="{{armour.aName}}">
+            </div>
 
-                {% if armour.aType == "Medium Armour" %}
-                    <option value="Medium Armour" selected>Medium Armour</option>
-                {% else %}
-                    <option value="Medium Armour">Medium Armour</option>
-                {% endif %}
+            <div class="form-group">
+                <label>Armour Type: </label>
+                <select name="aType" class="form-control" id="aType">
+                    {% if armour.aType == "Light Armour" %}
+                        <option value="Light Armour" selected>Light Armour</option>
+                    {% else %}
+                        <option value="Light Armour">Light Armour</option>
+                    {% endif %}
 
-                {% if armour.aType == "Heavy Armour" %}
-                    <option value="Heavy Armour" selected>Heavy Armour</option>
-                {% else %}
-                    <option value="Heavy Armour">Heavy Armour</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Base AC: <input type="text" name="aBase" id="aBase" value="{{armour.aBase}}"></label>
-            <br>
-            <label>Description: <input type="text" name="aDesc" id="aDesc" value="{{armour.aDesc}}"></label>
-            <br>
-            <input type="submit" value="Save Changes">
+                    {% if armour.aType == "Medium Armour" %}
+                        <option value="Medium Armour" selected>Medium Armour</option>
+                    {% else %}
+                        <option value="Medium Armour">Medium Armour</option>
+                    {% endif %}
+
+                    {% if armour.aType == "Heavy Armour" %}
+                        <option value="Heavy Armour" selected>Heavy Armour</option>
+                    {% else %}
+                        <option value="Heavy Armour">Heavy Armour</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Base AC: </label>
+                <input type="text" name="aBase" class="form-control" id="aBase" value="{{armour.aBase}}">
+            </div>
+
+            <div class="form-group">
+                <label>Description: </label>
+                <input type="text" name="aDesc" class="form-control" id="aDesc" value="{{armour.aDesc}}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 
