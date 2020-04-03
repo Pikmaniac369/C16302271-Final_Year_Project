@@ -29,25 +29,33 @@
         </form>
     </div>
     {% if locations|length >= 1 %}
-    <h2 style="text-align: center;"><b><u>Your Locations:</u></b></h2>
-    <table>
-        <tr>
-            <th><b><u>Location Name:</u></b></th>
-            <th><b><u>Description:</u></b></th>
-            <th><b><u>Actions:</u></b></th>
-        </tr>
-        {% for location in locations %}
-            <tr>
-                <td>{{ location.lName }}</td>
-                <td>{{ location.lDesc }}</td>
-                <td>
-                    <a href="/updateLocation/{{location.lID}}">Edit Location</a>
-                    <br>
-                    <a href="/deleteLocation/{{location.lID}}">Delete Location</a>
-                </td>
-            </tr>
-        {% endfor %}
+    <h2><b><u>Your Locations:</u></b></h2>
+    <table class="table table-bordered table-sm">
 
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col" class="w-25"><b><u>Location Name:</u></b></th>
+                <th scope="col"><b><u>Description:</u></b></th>
+                <th scope="col"><b><u>Actions:</u></b></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for location in locations %}
+                <tr>
+                    <th scope="row"></th>
+                    <td>{{ location.lName }}</td>
+                    <td>{{ location.lDesc }}</td>
+                    <td>
+                        <a href="/updateLocation/{{location.lID}}">Edit Location</a>
+                        <br>
+                        <a href="/deleteLocation/{{location.lID}}">Delete Location</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
     </table>
     {% endif %}
 </div>
