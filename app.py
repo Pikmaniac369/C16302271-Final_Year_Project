@@ -123,6 +123,8 @@ def characters():
         if c_Pic and allowed_file(c_Pic.filename):
             c_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+        # Edit Character's Stats based on Race/Subrace
+
         new_character = Character(cPicPath=c_Pic_Path, cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
 
         try:
