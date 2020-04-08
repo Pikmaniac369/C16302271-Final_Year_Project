@@ -62,23 +62,65 @@
                             <option value="Dragonborn">Dragonborn</option>
                         {% endif %}
 
-                        {% if character.cRace == "Dwarf" %}
-                            <option value="Dwarf" selected>Dwarf</option>
-                        {% else %}
-                            <option value="Dwarf">Dwarf</option>
-                        {% endif %}
+                        <optgroup label="Dwarf Subraces">
+                            {% if character.cRace == "Gray Dwarf (Duergar)" %}
+                                <option value="Gray Dwarf (Duergar)" selected>Gray Dwarf (Duergar)</option>
+                            {% else %}
+                                <option value="Gray Dwarf (Duergar)">Gray Dwarf (Duergar)</option>
+                            {% endif %}
 
-                        {% if character.cRace == "Elf" %}
-                            <option value="Elf" selected>Elf</option>
-                        {% else %}
-                            <option value="Elf">Elf</option>
-                        {% endif %}
+                            {% if character.cRace == "Hill Dwarf" %}
+                                <option value="Hill Dwarf" selected>Hill Dwarf</option>
+                            {% else %}
+                                <option value="Hill Dwarf">Hill Dwarf</option>
+                            {% endif %}
+
+                            {% if character.cRace == "Mountain Dwarf" %}
+                                <option value="Mountain Dwarf" selected>Mountain Dwarf</option>
+                            {% else %}
+                                <option value="Mountain Dwarf">Mountain Dwarf</option>
+                            {% endif %}
+                        </optgroup>
+
+                        <optgroup label="Elf Subraces">
+                            {% if character.cRace == "Dark Elf (Drow)" %}
+                                <option value="Dark Elf (Drow)" selected>Dark Elf (Drow)</option>
+                            {% else %}
+                                <option value="Dark Elf (Drow)">Dark Elf (Drow)</option>
+                            {% endif %}
+
+                            {% if character.cRace == "High Elf" %}
+                                <option value="High Elf" selected>High Elf</option>
+                            {% else %}
+                                <option value="High Elf">High Elf</option>
+                            {% endif %}
+
+                            {% if character.cRace == "Wood Elf" %}
+                                <option value="Wood Elf" selected>Wood Elf</option>
+                            {% else %}
+                                <option value="Wood Elf">Wood Elf</option>
+                            {% endif %}
+                        </optgroup>
                         
-                        {% if character.cRace == "Gnome" %}
-                            <option value="Gnome" selected>Gnome</option>
-                        {% else %}
-                            <option value="Gnome">Gnome</option>
-                        {% endif %}
+                        <optgroup label="Gnome Subraces">
+                            {% if character.cRace == "Deep Gnome (Svirfneblin)" %}
+                                <option value="Deep Gnome (Svirfneblin)" selected>Deep Gnome (Svirfneblin)</option>
+                            {% else %}
+                                <option value="Deep Gnome (Svirfneblin)">Deep Gnome (Svirfneblin)</option>
+                            {% endif %}
+
+                            {% if character.cRace == "Forest Gnome" %}
+                                <option value="Forest Gnome" selected>Forest Gnome</option>
+                            {% else %}
+                                <option value="Forest Gnome">Forest Gnome</option>
+                            {% endif %}
+
+                            {% if character.cRace == "Rock Gnome" %}
+                                <option value="Rock Gnome" selected>Rock Gnome</option>
+                            {% else %}
+                                <option value="Rock Gnome">Rock Gnome</option>
+                            {% endif %}
+                        </optgroup>
                         
                         {% if character.cRace == "Half-Elf" %}
                             <option value="Half-Elf" selected>Half-Elf</option>
@@ -86,11 +128,19 @@
                             <option value="Half-Elf">Half-Elf</option>
                         {% endif %}
                         
-                        {% if character.cRace == "Halfling" %}
-                            <option value="Halfling" selected>Halfling</option>
-                        {% else %}
-                            <option value="Halfling">Halfling</option>
-                        {% endif %}
+                        <optgroup label="Halfling Subraces">
+                            {% if character.cRace == "Lightfoot Halfling" %}
+                                <option value="Lightfoot Halfling" selected>Lightfoot Halfling</option>
+                            {% else %}
+                                <option value="Lightfoot Halfling">Lightfoot Halfling</option>
+                            {% endif %}
+
+                            {% if character.cRace == "Stout Halfling" %}
+                                <option value="Stout Halfling" selected>Stout Halfling</option>
+                            {% else %}
+                                <option value="Stout Halfling">Stout Halfling</option>
+                            {% endif %}
+                        </optgroup>
                         
                         {% if character.cRace == "Half-Orc" %}
                             <option value="Half-Orc" selected>Half-Orc</option>
