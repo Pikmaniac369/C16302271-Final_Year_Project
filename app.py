@@ -124,6 +124,58 @@ def characters():
             c_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         # Edit Character's Stats based on Race/Subrace
+        if c_Race == "Dragonborn":
+            c_Str = c_Str + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "Gray Dwarf (Duergar)":
+            c_Str = c_Str + 1
+            c_Con = c_Con + 2
+        else if c_Race == "Hill Dwarf":
+            c_Con = c_Con + 2
+            c_Wis = c_Wis + 1
+        else if c_Race == "Mountain Dwarf":
+            c_Str = c_Str + 2
+            c_Con = c_Con + 2
+        else if c_Race == "Dark Elf (Drow)":
+            c_Dex = c_Dex + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "High Elf":
+            c_Dex = c_Dex + 2
+            c_Int = c_Int + 1
+        else if c_Race == "Wood Elf":
+            c_Dex = c_Dex + 2
+            c_Wis = c_Wis + 1
+        else if c_Race == "Deep Gnome (Svirfneblin)":
+            c_Dex = c_Dex + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Forest Gnome":
+            c_Dex = c_Dex + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Rock Gnome":
+            c_Con = c_Con + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Half-Elf":
+            c_Cha = c_Cha + 2
+            # Add ability to select 2 other ability scores by 1
+        else if c_Race == "Lightfoot Halfling":
+            c_Dex = c_Dex + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "Stout Halfling":
+            c_Dex = c_Dex + 2
+            c_Con = c_Con + 1
+        else if c_Race == "Half-Orc":
+            c_Str = c_Str + 2
+            c_Con = c_Con + 1
+        else if c_Race == "Human":
+            c_Str = c_Str + 1
+            c_Dex = c_Dex + 1
+            c_Con = c_Con + 1
+            c_Int = c_Int + 1
+            c_Wis = c_Wis + 1
+            c_Cha = c_Cha + 1
+        else if c_Race == "Tiefling":
+            c_Int = c_Int + 1
+            c_Cha = c_Cha + 2
 
         new_character = Character(cPicPath=c_Pic_Path, cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
 
@@ -163,6 +215,41 @@ def updateCharacter(id):
             character.cPicPath = character.cPicPath
         else:
             character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
+        # Remove racial bonus to stats from previous race:
+        '''if c_Race == "Dragonborn":
+
+        else if c_Race == "Gray Dwarf (Duergar)":
+
+        else if c_Race == "Hill Dwarf":
+
+        else if c_Race == "Mountain Dwarf":
+
+        else if c_Race == "Dark Elf (Drow)":
+
+        else if c_Race == "High Elf":
+
+        else if c_Race == "Wood Elf":
+
+        else if c_Race == "Deep Gnome (Svirfneblin)":
+
+        else if c_Race == "Forest Gnome":
+
+        else if c_Race == "Rock Gnome":
+
+        else if c_Race == "Half-Elf":
+
+        else if c_Race == "Lightfoot Halfling":
+
+        else if c_Race == "Stout Halfling":
+
+        else if c_Race == "Half-Orc":
+
+        else if c_Race == "Human":
+
+        else if c_Race == "Tiefling":
+
+            '''
 
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
@@ -176,6 +263,63 @@ def updateCharacter(id):
         character.cInt = request.form['cInt']
         character.cWis = request.form['cWis']
         character.cCha = request.form['cCha']
+
+        
+        # Edit Character's Stats based on Race/Subrace
+        '''
+        if c_Race == "Dragonborn":
+            c_Str = c_Str + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "Gray Dwarf (Duergar)":
+            c_Str = c_Str + 1
+            c_Con = c_Con + 2
+        else if c_Race == "Hill Dwarf":
+            c_Con = c_Con + 2
+            c_Wis = c_Wis + 1
+        else if c_Race == "Mountain Dwarf":
+            c_Str = c_Str + 2
+            c_Con = c_Con + 2
+        else if c_Race == "Dark Elf (Drow)":
+            c_Dex = c_Dex + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "High Elf":
+            c_Dex = c_Dex + 2
+            c_Int = c_Int + 1
+        else if c_Race == "Wood Elf":
+            c_Dex = c_Dex + 2
+            c_Wis = c_Wis + 1
+        else if c_Race == "Deep Gnome (Svirfneblin)":
+            c_Dex = c_Dex + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Forest Gnome":
+            c_Dex = c_Dex + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Rock Gnome":
+            c_Con = c_Con + 1
+            c_Int = c_Int + 1
+        else if c_Race == "Half-Elf":
+            c_Cha = c_Cha + 2
+            # Add ability to select 2 other ability scores by 1
+        else if c_Race == "Lightfoot Halfling":
+            c_Dex = c_Dex + 2
+            c_Cha = c_Cha + 1
+        else if c_Race == "Stout Halfling":
+            c_Dex = c_Dex + 2
+            c_Con = c_Con + 1
+        else if c_Race == "Half-Orc":
+            c_Str = c_Str + 2
+            c_Con = c_Con + 1
+        else if c_Race == "Human":
+            c_Str = c_Str + 1
+            c_Dex = c_Dex + 1
+            c_Con = c_Con + 1
+            c_Int = c_Int + 1
+            c_Wis = c_Wis + 1
+            c_Cha = c_Cha + 1
+        else if c_Race == "Tiefling":
+            c_Int = c_Int + 1
+            c_Cha = c_Cha + 2
+        '''    
 
         try:
             db.session.commit()
