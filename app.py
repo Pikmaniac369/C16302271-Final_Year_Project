@@ -155,8 +155,9 @@ def characters():
             c_Con = c_Con + 1
             c_Int = c_Int + 1
         else if c_Race == "Half-Elf":
+            c_Dex = c_Dex + 1
+            c_Int = c_Int + 1
             c_Cha = c_Cha + 2
-            # Add ability to select 2 other ability scores by 1
         else if c_Race == "Lightfoot Halfling":
             c_Dex = c_Dex + 2
             c_Cha = c_Cha + 1
@@ -217,39 +218,59 @@ def updateCharacter(id):
             character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         
         # Remove racial bonus to stats from previous race:
-        '''if c_Race == "Dragonborn":
-
-        else if c_Race == "Gray Dwarf (Duergar)":
-
-        else if c_Race == "Hill Dwarf":
-
-        else if c_Race == "Mountain Dwarf":
-
-        else if c_Race == "Dark Elf (Drow)":
-
-        else if c_Race == "High Elf":
-
-        else if c_Race == "Wood Elf":
-
-        else if c_Race == "Deep Gnome (Svirfneblin)":
-
-        else if c_Race == "Forest Gnome":
-
-        else if c_Race == "Rock Gnome":
-
-        else if c_Race == "Half-Elf":
-
-        else if c_Race == "Lightfoot Halfling":
-
-        else if c_Race == "Stout Halfling":
-
-        else if c_Race == "Half-Orc":
-
-        else if c_Race == "Human":
-
-        else if c_Race == "Tiefling":
-
-            '''
+        if character.cRace == "Dragonborn":
+            character.cStr = character.cStr - 2
+            character.cCha = character.cCha - 1
+        else if character.cRace == "Gray Dwarf (Duergar)":
+            character.cStr = character.cStr - 1
+            character.cCon = character.cCon - 2
+        else if character.cRace == "Hill Dwarf":
+            character.cCon = character.cCon - 2
+            character.cWis = character.cWis - 1
+        else if character.cRace == "Mountain Dwarf":
+            character.cStr = character.cStr - 2
+            character.cCon = character.cCon - 2
+        else if character.cRace == "Dark Elf (Drow)":
+            character.cDex = character.cDex - 2
+            character.cCha = character.cCha - 1
+        else if character.cRace == "High Elf":
+            character.cDex = character.cDex - 2
+            character.cInt = character.cInt - 1
+        else if character.cRace == "Wood Elf":
+            character.cDex = character.cDex - 2
+            character.cWis = character.cWis - 1
+        else if character.cRace == "Deep Gnome (Svirfneblin)":
+            character.cDex = character.cDex - 1
+            character.cInt = character.cInt - 2
+        else if character.cRace == "Forest Gnome":
+            character.cDex = character.cDex - 1
+            character.cInt = character.cInt - 2
+        else if character.cRace == "Rock Gnome":
+            character.cCon = character.cCon - 1
+            character.cInt = character.cInt - 2
+        else if character.cRace == "Half-Elf":
+            character.cDex = character.cDex - 1
+            character.cInt = character.cInt - 1
+            character.cCha = character.cCha - 2
+        else if character.cRace == "Lightfoot Halfling":
+            character.cDex = character.cDex - 2
+            character.cCha = character.cCha - 1
+        else if character.cRace == "Stout Halfling":
+            character.cDex = character.cDex - 2
+            character.cCon = character.cCon - 1
+        else if character.cRace == "Half-Orc":
+            character.cStr = character.cStr - 2
+            character.cCon = character.cCon - 1
+        else if character.cRace == "Human":
+            character.cStr = character.cStr - 1
+            character.cDex = character.cDex - 1
+            character.cCon = character.cCon - 1
+            character.cInt = character.cInt - 1
+            character.cWis = character.cWis - 1
+            character.cCha = character.cCha - 1
+        else if character.cRace == "Tiefling":
+            character.cInt = character.cInt - 1
+            character.cCha = character.cCha - 2
 
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
@@ -266,60 +287,59 @@ def updateCharacter(id):
 
         
         # Edit Character's Stats based on Race/Subrace
-        '''
-        if c_Race == "Dragonborn":
-            c_Str = c_Str + 2
-            c_Cha = c_Cha + 1
-        else if c_Race == "Gray Dwarf (Duergar)":
-            c_Str = c_Str + 1
-            c_Con = c_Con + 2
-        else if c_Race == "Hill Dwarf":
-            c_Con = c_Con + 2
-            c_Wis = c_Wis + 1
-        else if c_Race == "Mountain Dwarf":
-            c_Str = c_Str + 2
-            c_Con = c_Con + 2
-        else if c_Race == "Dark Elf (Drow)":
-            c_Dex = c_Dex + 2
-            c_Cha = c_Cha + 1
-        else if c_Race == "High Elf":
-            c_Dex = c_Dex + 2
-            c_Int = c_Int + 1
-        else if c_Race == "Wood Elf":
-            c_Dex = c_Dex + 2
-            c_Wis = c_Wis + 1
-        else if c_Race == "Deep Gnome (Svirfneblin)":
-            c_Dex = c_Dex + 1
-            c_Int = c_Int + 1
-        else if c_Race == "Forest Gnome":
-            c_Dex = c_Dex + 1
-            c_Int = c_Int + 1
-        else if c_Race == "Rock Gnome":
-            c_Con = c_Con + 1
-            c_Int = c_Int + 1
-        else if c_Race == "Half-Elf":
-            c_Cha = c_Cha + 2
-            # Add ability to select 2 other ability scores by 1
-        else if c_Race == "Lightfoot Halfling":
-            c_Dex = c_Dex + 2
-            c_Cha = c_Cha + 1
-        else if c_Race == "Stout Halfling":
-            c_Dex = c_Dex + 2
-            c_Con = c_Con + 1
-        else if c_Race == "Half-Orc":
-            c_Str = c_Str + 2
-            c_Con = c_Con + 1
-        else if c_Race == "Human":
-            c_Str = c_Str + 1
-            c_Dex = c_Dex + 1
-            c_Con = c_Con + 1
-            c_Int = c_Int + 1
-            c_Wis = c_Wis + 1
-            c_Cha = c_Cha + 1
-        else if c_Race == "Tiefling":
-            c_Int = c_Int + 1
-            c_Cha = c_Cha + 2
-        '''    
+        if character.cRace == "Dragonborn":
+            character.cStr = character.cStr + 2
+            character.cCha = character.cCha + 1
+        else if character.cRace == "Gray Dwarf (Duergar)":
+            character.cStr = character.cStr + 1
+            character.cCon = character.cCon + 2
+        else if character.cRace == "Hill Dwarf":
+            character.cCon = character.cCon + 2
+            character.cWis = character.cWis + 1
+        else if character.cRace == "Mountain Dwarf":
+            character.cStr = character.cStr + 2
+            character.cCon = character.cCon + 2
+        else if character.cRace == "Dark Elf (Drow)":
+            character.cDex = character.cDex + 2
+            character.cCha = character.cCha + 1
+        else if character.cRace == "High Elf":
+            character.cDex = character.cDex + 2
+            character.cInt = character.cInt + 1
+        else if character.cRace == "Wood Elf":
+            character.cDex = character.cDex + 2
+            character.cWis = character.cWis + 1
+        else if character.cRace == "Deep Gnome (Svirfneblin)":
+            character.cDex = character.cDex + 1
+            character.cInt = character.cInt + 1
+        else if character.cRace == "Forest Gnome":
+            character.cDex = character.cDex + 1
+            character.cInt = character.cInt + 1
+        else if character.cRace == "Rock Gnome":
+            character.cCon = character.cCon + 1
+            character.cInt = character.cInt + 1
+        else if character.cRace == "Half-Elf":
+            character.cDex = character.cDex + 1
+            character.cInt = character.cInt + 1
+            character.cCha = character.cCha + 2
+        else if character.cRace == "Lightfoot Halfling":
+            character.cDex = character.cDex + 2
+            character.cCha = character.cCha + 1
+        else if character.cRace == "Stout Halfling":
+            character.cDex = character.cDex + 2
+            character.cCon = character.cCon + 1
+        else if character.cRace == "Half-Orc":
+            character.cStr = character.cStr + 2
+            character.cCon = character.cCon + 1
+        else if character.cRace == "Human":
+            character.cStr = character.cStr + 1
+            character.cDex = character.cDex + 1
+            character.cCon = character.cCon + 1
+            character.cInt = character.cInt + 1
+            character.cWis = character.cWis + 1
+            character.cCha = character.cCha + 1
+        else if character.cRace == "Tiefling":
+            character.cInt = character.cInt + 1
+            character.cCha = character.cCha + 2
 
         try:
             db.session.commit()
