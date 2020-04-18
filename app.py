@@ -201,6 +201,16 @@ def deleteCharacter(id):
     except:
         return 'There was a problem deleting your character.'
 
+@app.route('/viewCharacter/<int:id>')
+def viewCharacter(id):
+    characterToDisplay = Character.query.get_or_404(id)
+
+    try:
+        return render_template('viewCharacter.html', character=characterToDisplay)
+    except:
+        return 'There was a problem displaying your character.'
+
+
 @app.route('/updateCharacter/<int:id>', methods=['GET', 'POST'])
 def updateCharacter(id):
     character = Character.query.get_or_404(id)

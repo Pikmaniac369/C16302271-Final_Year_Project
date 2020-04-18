@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Characters: Update Character</title>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <button id="characterDashboardButton" onclick="window.location.href = '../dashboard.html';">Home</button>
+    <h1>{{character.cName}}'s Details:</h1>
+
+    <div class="form">
+        <form action="/updateCharacter/{{character.cID}}" method="POST" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cPic">Reference Image: </label>
+                    <img src="../{{ character.cPicPath }}" alt="ref-img" class="w-25 img-fluid">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cName">Name: </label>
+                    <p><b>{{character.cName}}</b></p>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="cAge">Age: </label>
+                    <p><b>{{character.cAge}} Years Old</b></p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cGender">Gender:</label>
+                    <p><b>{{character.cGender}}</b></p>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="cRace">Race: </label>
+                    <p><b>{{character.cRace}}</b></p>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="cClass">Class: </label>
+                    <p><b>{{character.cClass}}</b></p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="cDesc">Description/Backstory: </label>
+                <p><b>{{character.cDesc}}</b></p>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="cStr">Strength: </label>
+                    <p><b>{{character.cStr}}</b></p>
+                </div>
+            
+                <div class="form-group col-md-2">
+                    <label for="cDex">Dexterity: </label>
+                    <p><b>{{character.cDex}}</b></p>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cCon">Constitution: </label>
+                    <p><b>{{character.cCon}}</b></p>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cInt">Intelligence: </label>
+                    <p><b>{{character.cInt}}</b></p>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cWis">Wisdom: </label>
+                    <p><b>{{character.cWis}}</b></p>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="cCha">Charisma: </label>
+                    <p><b>{{character.cCha}}</b></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
