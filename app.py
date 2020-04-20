@@ -401,6 +401,16 @@ def deleteWeapon(id):
     except:
         return 'There was a problem deleting your weapon.'
 
+@app.route('/viewWeapon/<int:id>')
+def viewWeapon(id):
+    weaponToDisplay = Weapon.query.get_or_404(id)
+
+    try:
+        return render_template('viewWeapon.html', weapon=weaponToDisplay)
+    except:
+        return 'There was a problem displaying your weapon.'
+
+
 @app.route('/updateWeapon/<int:id>', methods=['GET', 'POST'])
 def updateWeapon(id):
     weapon = Weapon.query.get_or_404(id)

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Weapons: View Weapon</title>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <button id="characterDashboardButton" onclick="window.location.href = '../dashboard.html';">Home</button>
+    <h1>{{weapon.wName}}'s Details:</h1>
+
+    <div class="form">
+        <form enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Reference Image: </label>
+                <img src="../{{ weapon.wPicPath }}" alt="ref-img">
+            </div>
+            
+            <div class="form-group">
+                <label>Weapon Name: </label>
+                <p><b>{{weapon.wName}}</b></p>
+            </div>
+            
+            <div class="form-group">
+                <label>Weapon Type: </label>
+                <p><b>{{weapon.wType}}</b></p>
+            </div>
+            
+            <div class="form-group">
+                <label>Damage Type: </label>
+                <p><b>{{weapon.wDamage}}</b></p>
+            </div>
+            
+            <div class="form-group">
+                <label>Damage Dice: </label>
+                <p><b>{{weapon.wDice}}</b></p>
+            </div>
+            
+            <div class="form-group">
+                <label>Description: </label>
+                <p><b>{{weapon.wDesc}}</b></p>
+            </div>
+            
+        </form>
+    </div>
+
+</div>
+{% endblock %}

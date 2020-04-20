@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Characters: Update Character</title>
+<title>Characters: View Character</title>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
     <h1>{{character.cName}}'s Details:</h1>
 
     <div class="form">
-        <form action="/updateCharacter/{{character.cID}}" method="POST" enctype="multipart/form-data">
+        <form enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="cPic">Reference Image: </label>
