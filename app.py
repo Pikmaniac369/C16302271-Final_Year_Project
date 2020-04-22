@@ -469,6 +469,15 @@ def deleteArmour(id):
     except:
         return 'There was a problem deleting your armour.'
 
+@app.route('/viewArmour/<int:id>')
+def viewArmour(id):
+    armourToDisplay = Armour.query.get_or_404(id)
+
+    try:
+        return render_template('viewArmour.html', armour=armourToDisplay)
+    except:
+        return 'There was a problem displaying your armour.'
+
 @app.route('/updateArmour/<int:id>', methods=['GET', 'POST'])
 def updateArmour(id):
     armour = Armour.query.get_or_404(id)
