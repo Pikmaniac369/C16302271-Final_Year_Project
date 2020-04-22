@@ -48,9 +48,9 @@
                     <td>{{ location.lName }}</td>
                     <td>{{ location.lDesc }}</td>
                     <td>
-                        <button onclick="window.location.href = './updateLocation/{{location.lID}}';" class="btn btn-danger btn-sm">Edit Location</button>
+                        <a href = "/updateLocation/{{location.lID}}">Edit Location</a>
                         <br>
-                        <button onclick="window.location.href = './deleteLocation/{{location.lID}}';" class="btn btn-danger btn-sm">Delete Location</button>
+                        <a href = "/deleteLocation/{{location.lID}}">Delete Location</a>>
                     </td>
                 </tr>
             {% endfor %}
