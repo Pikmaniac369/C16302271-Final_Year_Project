@@ -421,8 +421,12 @@ def updateWeapon(id):
 
         if w_Pic and allowed_file(w_Pic.filename):
             w_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-        weapon.wPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
+        if w_Pic.filename == "":
+            weapon.wPicPath = weapon.wPicPath
+        else:
+            weapon.wPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
         weapon.wName = request.form['wName']
         weapon.wType = request.form['wType']
         weapon.wDamage = request.form['wDamage']

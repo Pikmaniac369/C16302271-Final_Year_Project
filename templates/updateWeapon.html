@@ -11,79 +11,104 @@
 
     <div class="form">
         <form action="/updateWeapon/{{weapon.wID}}" method="POST" enctype="multipart/form-data">
-            <label>Reference Image: <img src="../{{ weapon.wPicPath }}" alt="ref-img"></label>
-            <br>
-            <label>Weapon Name: <input type="text" name="wName" id="wName" value="{{weapon.wName}}"></label>
-            <br>
-            <label>Weapon Type: <select name="wType" id="wType">
-                {% if weapon.wType == "Simple" %}
-                    <option value="Simple" selected>Simple</option>
-                {% else %}
-                    <option value="Simple">Simple</option>
-                {% endif %}
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="wPic">Reference Image: </label>
+                    <br>
+                    <img src="../{{ weapon.wPicPath }}" alt="ref-img" class="w-25 img-fluid">
+                    <input type="file" name="wPic" id="wPic" class="form-control-file" value="Change Picture">
+                </div>
 
-                {% if weapon.wType == "Martial" %}
-                    <option value="Martial" selected>Martial</option>
-                {% else %}
-                    <option value="Martial">Martial</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Damage Type: <select name="wDamage" id="wDamage">
-                {% if weapon.wDamage == "Bludgeoning" %}
-                    <option value="Bludgeoning" selected>Bludgeoning</option>
-                {% else %}
-                    <option value="Bludgeoning">Bludgeoning</option>
-                {% endif %}
+                <div class="form-group col-md-6">
+                    <label for="wName">Weapon Name: </label>
+                    <input type="text" name="wName" id="wName" class="form-control" value="{{weapon.wName}}">
+                </div>
+            </div>
 
-                {% if weapon.wDamage == "Piercing" %}
-                    <option value="Piercing" selected>Piercing</option>
-                {% else %}
-                    <option value="Piercing">Piercing</option>
-                {% endif %}
+            
+            
+            <div class="form-group">
+                <label for="wType">Weapon Type: </label>
+                <select name="wType" id="wType" class="form-control">
+                    {% if weapon.wType == "Simple" %}
+                        <option value="Simple" selected>Simple</option>
+                    {% else %}
+                        <option value="Simple">Simple</option>
+                    {% endif %}
 
-                {% if weapon.wDamage == "Slashing" %}
-                    <option value="Slashing" selected>Slashing</option>
-                {% else %}
-                    <option value="Slashing">Slashing</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Damage Dice: <select name="wDice" id="wDice">
-                {% if weapon.wDice == "d4" %}
-                    <option value="d4" selected>d4</option>
-                {% else %}
-                    <option value="d4">d4</option>
-                {% endif %}
+                    {% if weapon.wType == "Martial" %}
+                        <option value="Martial" selected>Martial</option>
+                    {% else %}
+                        <option value="Martial">Martial</option>
+                    {% endif %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="wDamage">Damage Type: </label>
+                <select name="wDamage" id="wDamage" class="form-control">
+                    {% if weapon.wDamage == "Bludgeoning" %}
+                        <option value="Bludgeoning" selected>Bludgeoning</option>
+                    {% else %}
+                        <option value="Bludgeoning">Bludgeoning</option>
+                    {% endif %}
 
-                {% if weapon.wDice == "d6" %}
-                    <option value="d6" selected>d6</option>
-                {% else %}
-                    <option value="d6">d6</option>
-                {% endif %}
-                
-                {% if weapon.wDice == "d8" %}
-                    <option value="d8" selected>d8</option>
-                {% else %}
-                    <option value="d8">d8</option>
-                {% endif %}
+                    {% if weapon.wDamage == "Piercing" %}
+                        <option value="Piercing" selected>Piercing</option>
+                    {% else %}
+                        <option value="Piercing">Piercing</option>
+                    {% endif %}
 
-                {% if weapon.wDice == "d10" %}
-                    <option value="d10" selected>d10</option>
-                {% else %}
-                    <option value="d10">d10</option>
-                {% endif %}
+                    {% if weapon.wDamage == "Slashing" %}
+                        <option value="Slashing" selected>Slashing</option>
+                    {% else %}
+                        <option value="Slashing">Slashing</option>
+                    {% endif %}
+                </select>
+            </div>
 
-                {% if weapon.wDice == "d12" %}
-                    <option value="d12" selected>d12</option>
-                {% else %}
-                    <option value="d12">d12</option>
-                {% endif %}
-            </select></label>
-            <br>
-            <label>Description: <input type="text" name="wDesc" id="wDesc" value="{{weapon.wDesc}}"></label>
-            <br>
-            <input type="submit" value="Save Changes">
+            <div class="form-group">
+                <label for="wDice">Damage Dice: </label>
+                <select name="wDice" id="wDice" class="form-control">
+                    {% if weapon.wDice == "d4" %}
+                        <option value="d4" selected>d4</option>
+                    {% else %}
+                        <option value="d4">d4</option>
+                    {% endif %}
+
+                    {% if weapon.wDice == "d6" %}
+                        <option value="d6" selected>d6</option>
+                    {% else %}
+                        <option value="d6">d6</option>
+                    {% endif %}
+                    
+                    {% if weapon.wDice == "d8" %}
+                        <option value="d8" selected>d8</option>
+                    {% else %}
+                       <option value="d8">d8</option>
+                    {% endif %}
+                    
+                    {% if weapon.wDice == "d10" %}
+                        <option value="d10" selected>d10</option>
+                    {% else %}
+                        <option value="d10">d10</option>
+                    {% endif %}
+
+                    {% if weapon.wDice == "d12" %}
+                        <option value="d12" selected>d12</option>
+                    {% else %}
+                        <option value="d12">d12</option>
+                    {% endif %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="wDesc">Description: </label>
+                <input type="text" name="wDesc" id="wDesc" value="{{weapon.wDesc}}" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
     </div>
 

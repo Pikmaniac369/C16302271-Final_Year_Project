@@ -11,34 +11,42 @@
 
     <div class="form">
         <form enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Reference Image: </label>
-                <img src="../{{ weapon.wPicPath }}" alt="ref-img">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Reference Image: </label>
+                    <br>
+                    <img src="../{{ weapon.wPicPath }}" alt="ref-img" class="img-fluid" style="max-height: 25vh;">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label>Weapon Name: </label>
+                    <p><b>{{weapon.wName}}</b></p>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label>Weapon Name: </label>
-                <p><b>{{weapon.wName}}</b></p>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Weapon Type: </label>
+                    <p><b>{{weapon.wType}}</b></p>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label>Damage Type: </label>
+                    <p><b>{{weapon.wDamage}}</b></p>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label>Damage Dice: </label>
+                    <p><b>{{weapon.wDice}}</b></p>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label>Weapon Type: </label>
-                <p><b>{{weapon.wType}}</b></p>
-            </div>
-            
-            <div class="form-group">
-                <label>Damage Type: </label>
-                <p><b>{{weapon.wDamage}}</b></p>
-            </div>
-            
-            <div class="form-group">
-                <label>Damage Dice: </label>
-                <p><b>{{weapon.wDice}}</b></p>
-            </div>
-            
-            <div class="form-group">
-                <label>Description: </label>
-                <p><b>{{weapon.wDesc}}</b></p>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Description: </label>
+                    <p><b>{{weapon.wDesc}}</b></p>
+                </div>
             </div>
             
         </form>
