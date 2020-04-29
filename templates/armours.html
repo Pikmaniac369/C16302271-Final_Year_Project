@@ -12,30 +12,34 @@
     <div class="form">
         <form action="armours.html" method="POST">
             
-            <div class="form-group">
-                <label>Armour Name: </label>
-                <input type="text" name="aName" class="form-control" id="aName" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Armour Type: </label>
-                <select name="aType" class="form-control" id="aType">
-                    <option value="Light Armour">Light Armour</option>
-                    <option value="Medium Armour">Medium Armour</option>
-                    <option value="Heavy Armour">Heavy Armour</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Armour Name: </label>
+                    <input type="text" name="aName" class="form-control" id="aName" required>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label>Armour Type: </label>
+                    <select name="aType" class="form-control" id="aType">
+                        <option value="Light Armour">Light Armour</option>
+                        <option value="Medium Armour">Medium Armour</option>
+                        <option value="Heavy Armour">Heavy Armour</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Base Armour Class: </label>
+                    <input type="number" name="aBase" class="form-control" id="aBase">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Base Armour Class: </label>
-                <input type="number" name="aBase" class="form-control" id="aBase">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Description: </label>
+                    <input type="text" name="aDesc" class="form-control" id="aDesc">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Description: </label>
-                <input type="text" name="aDesc" class="form-control" id="aDesc">
-            </div>
-            
             <button type="submit" class="btn btn-primary">Add Armour</button>
             
         </form>

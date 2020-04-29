@@ -11,25 +11,30 @@
 
     <div class="form">
         <form>
-            <div class="form-group">
-                <label>Armour Name: </label>
-                <p><b>{{armour.aName}}</b></p>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Armour Name: </label>
+                    <p><b>{{armour.aName}}</b></p>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Armour Type: </label>
+                    <p><b>{{armour.aType}}</b></p>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Base AC: </label>
+                    <p><b>{{armour.aBase}}</b></p>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Description: </label>
+                    <p><b>{{armour.aDesc}}</b></p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Armour Type: </label>
-                <p><b>{{armour.aType}}</b></p>
-            </div>
-
-            <div class="form-group">
-                <label>Base AC: </label>
-                <p><b>{{armour.aBase}}</b></p>
-            </div>
-
-            <div class="form-group">
-                <label>Description: </label>
-                <p><b>{{armour.aDesc}}</b></p>
-            </div>
         </form>
     </div>
 
