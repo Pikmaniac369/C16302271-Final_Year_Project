@@ -7,6 +7,18 @@
 
 {% block content %}
 <div class="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="./dashboard.html">Dashboard</a>
+                <a class="nav-item nav-link active" href="./characters.html">Characters <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="./weapons.html">Weapons</a>
+                <a class="nav-item nav-link" href="./armours.html">Armours</a>
+                <a class="nav-item nav-link" href="./locations.html">Locations</a>
+            </div>
+
+        </div>
+    </nav>
     <h1>Hello. Welcome to the characters page!</h1>
     <button id="characterDashboardButton" onclick="window.location.href = './dashboard.html';" class="btn btn-danger">Home</button>
     <h2>Enter your character's details below:</h2>
