@@ -1,10 +1,13 @@
 import os
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
-# Might use Flask Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Length
 
 UPLOAD_FOLDER = 'static/User_Images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -12,23 +15,30 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 # Install the Bootstrap extension
 Bootstrap(app)
+# Configure the Secret Key
+app.config['SECRET_KEY'] = 'thiskeyissosecretthateveniwillprobablyforgetitxyz'
 # Configure the upload folder:
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Configure the database:
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projectDB.db'
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-'''
 # User Table:
-class User(db.Model):
-    userID = db.Column(db.Integer, primary_key=True)
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
-    userEmail = db.Column(db.String(50)) <--> Do I need this?
+    characters = db.relationship('Character', backref='creator')
+    weapons = db.relationship('Weapon', backref='creator')
+    armours = db.relationship('Armour', backref='creator')
+    locations = db.relationship('Location', backref='creator')
 
     def __repr__(self):
-        return '<User %r>' % self.userID
-'''
+        return '<User %r>' % self.id
+
 # Character Table:
 class Character(db.Model):
     cID = db.Column(db.Integer, primary_key=True)
@@ -45,6 +55,7 @@ class Character(db.Model):
     cInt = db.Column(db.Integer, default=8)# The character's Intelligence stat
     cWis = db.Column(db.Integer, default=8)# The character's Wisdom stat
     cCha = db.Column(db.Integer, default=8)# The character's Charisma stat
+    creatorID = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Character %r>' % self.cID
@@ -59,6 +70,7 @@ class Weapon(db.Model):
     wDice = db.Column(db.String(10))# Will change to a list of dice types at a later time, i.e. d4, d6, d8, d10, d12.
     # wMagic = db.Column(db.Boolean) Is the weapon magical.
     wDesc = db.Column(db.String(100000))# Description of the weapon, i.e. appearance, effects, magic effects.
+    creatorID = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Weapon %r>' % self.wID
@@ -73,6 +85,7 @@ class Armour(db.Model):
     # aMod = db.Column(db.Integer) The maximum DEX mod to apply if it uses it.
     # aMagic = db.Column(db.Boolean) Is the armour magical.
     aDesc = db.Column(db.String(100000))# Description of the armour, i.e. appearance, effects, magic effects.
+    creatorID = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Armour %r>' % self.aID
@@ -83,10 +96,28 @@ class Location(db.Model):
     lID = db.Column(db.Integer, primary_key=True)
     lName = db.Column(db.String(100), nullable=False)# Name of the location.
     lDesc = db.Column(db.String(100000))# Description of the location.
+    creatorID = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Location %r>' % self.lID
 
+# Load the user:
+@login_manager.user_loader
+def load_user(id):
+    user = User.query.get_or_404(id)
+    return user
+
+class LoginForm(FlaskForm):
+    uName = StringField('Username', validators=[InputRequired()])
+    pwd = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
+    rememberUser = BooleanField('Stay Logged In')
+
+class SignUpForm(FlaskForm):
+    uName = StringField('Username', validators=[InputRequired()])
+    pwd = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
+ 
+
+# Check that the file's extension is allowed
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -95,12 +126,45 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
+@app.route('/login.html', methods=['POST', 'GET'])
+def login():
+    loginForm = LoginForm()
+
+    if loginForm.validate_on_submit():
+        userSearch = User.query.filter_by(username=loginForm.uName.data).first()
+        if userSearch:
+            if check_password_hash(userSearch.password, loginForm.pwd.data):
+                login_user(userSearch, remember=loginForm.rememberUser.data)
+                return redirect('/dashboard.html')
+    
+    return render_template('login.html', form=loginForm)
+
+@app.route('/signup.html', methods=['POST', 'GET'])
+def signup():
+    signupForm = SignUpForm()
+
+    if signupForm.validate_on_submit():
+        hashPwd = generate_password_hash(signupForm.pwd.data, method='sha256')
+        newUser = User(username=signupForm.uName.data, password=hashPwd)
+
+        try:
+            db.session.add(newUser)
+            db.session.commit()
+            return redirect('/login.html')
+        except:
+            return 'There was an issue adding you to the database.'
+    
+    return render_template('signup.html', form=signupForm)
+
+
 @app.route('/dashboard.html')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
 # Character-related functionality:
 @app.route('/characters.html', methods=['POST', 'GET'])
+@login_required
 def characters():
     if request.method == 'POST':
         c_Pic = request.files['cPic']
@@ -178,7 +242,7 @@ def characters():
             c_Int = int(c_Int) + 1
             c_Cha = int(c_Cha) + 2
 
-        new_character = Character(cPicPath=c_Pic_Path, cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
+        new_character = Character(creatorID=current_user.id, cPicPath=c_Pic_Path, cName=c_Name, cAge=c_Age, cGender=c_Gender, cRace=c_Race, cClass=c_Class, cDesc=c_Desc, cStr=c_Str, cDex=c_Dex, cCon=c_Con, cInt=c_Int, cWis=c_Wis, cCha=c_Cha)
 
         try:
             db.session.add(new_character)
@@ -187,10 +251,11 @@ def characters():
         except:
             return 'There was an issue adding your character to the database.'
     else:
-        characters = Character.query.order_by(Character.cID).all()
+        characters = Character.query.filter_by(creatorID=current_user.id).order_by(Character.cID).all()
         return render_template('characters.html', characters=characters)
 
 @app.route('/deleteCharacter/<int:id>')
+@login_required
 def deleteCharacter(id):
     character_to_delete = Character.query.get_or_404(id)
 
@@ -202,6 +267,7 @@ def deleteCharacter(id):
         return 'There was a problem deleting your character.'
 
 @app.route('/viewCharacter/<int:id>')
+@login_required
 def viewCharacter(id):
     characterToDisplay = Character.query.get_or_404(id)
 
@@ -210,8 +276,8 @@ def viewCharacter(id):
     except:
         return 'There was a problem displaying your character.'
 
-
 @app.route('/updateCharacter/<int:id>', methods=['GET', 'POST'])
+@login_required
 def updateCharacter(id):
     character = Character.query.get_or_404(id)
 
@@ -281,8 +347,6 @@ def updateCharacter(id):
             character.cPicPath = character.cPicPath
         else:
             character.cPicPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        
-        
 
         character.cName = request.form['cName']
         character.cAge = request.form['cAge']
@@ -297,7 +361,6 @@ def updateCharacter(id):
         character.cWis = request.form['cWis']
         character.cCha = request.form['cCha']
 
-        
         # Edit Character's Stats based on Race/Subrace
         if character.cRace == "Dragonborn":
             character.cStr = int(character.cStr) + 2
@@ -363,6 +426,7 @@ def updateCharacter(id):
 
 # Weapon-related functionality:
 @app.route('/weapons.html', methods=['POST', 'GET'])
+@login_required
 def weapons():
     if request.method == 'POST':
         w_Pic = request.files['wPic']
@@ -378,7 +442,7 @@ def weapons():
         if w_Pic and allowed_file(w_Pic.filename):
             w_Pic.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        new_weapon = Weapon(wPicPath=w_Pic_Path, wName=w_Name, wType=w_Type, wDamage=w_Damage, wDice=w_Dice, wDesc=w_Desc)
+        new_weapon = Weapon(creatorID=current_user.id, wPicPath=w_Pic_Path, wName=w_Name, wType=w_Type, wDamage=w_Damage, wDice=w_Dice, wDesc=w_Desc)
 
         try:
             db.session.add(new_weapon)
@@ -387,10 +451,11 @@ def weapons():
         except:
             return 'There was an issue adding your weapon to the database.'
     else:
-        weapons = Weapon.query.order_by(Weapon.wID).all()
+        weapons = Weapon.query.filter_by(creatorID=current_user.id).order_by(Weapon.wID).all()
         return render_template('weapons.html', weapons=weapons)
 
 @app.route('/deleteWeapon/<int:id>')
+@login_required
 def deleteWeapon(id):
     weapon_to_delete = Weapon.query.get_or_404(id)
 
@@ -402,6 +467,7 @@ def deleteWeapon(id):
         return 'There was a problem deleting your weapon.'
 
 @app.route('/viewWeapon/<int:id>')
+@login_required
 def viewWeapon(id):
     weaponToDisplay = Weapon.query.get_or_404(id)
 
@@ -412,6 +478,7 @@ def viewWeapon(id):
 
 
 @app.route('/updateWeapon/<int:id>', methods=['GET', 'POST'])
+@login_required
 def updateWeapon(id):
     weapon = Weapon.query.get_or_404(id)
 
@@ -443,6 +510,7 @@ def updateWeapon(id):
 
 # Armour-related functionality:
 @app.route('/armours.html', methods=['POST', 'GET'])
+@login_required
 def armours():
     if request.method == 'POST':
         a_Name = request.form['aName']
@@ -450,7 +518,7 @@ def armours():
         a_Base = request.form['aBase']
         a_Desc = request.form['aDesc']
 
-        new_armour = Armour(aName=a_Name, aType=a_Type, aBase=a_Base, aDesc=a_Desc)
+        new_armour = Armour(creatorID=current_user.id, aName=a_Name, aType=a_Type, aBase=a_Base, aDesc=a_Desc)
 
         try:
             db.session.add(new_armour)
@@ -459,10 +527,11 @@ def armours():
         except:
             return 'There was an issue adding your armour to the database.'
     else:
-        armours = Armour.query.order_by(Armour.aID).all()
+        armours = Armour.query.filter_by(creatorID=current_user.id).order_by(Armour.aID).all()
         return render_template('armours.html', armours=armours)
 
 @app.route('/deleteArmour/<int:id>')
+@login_required
 def deleteArmour(id):
     armour_to_delete = Armour.query.get_or_404(id)
 
@@ -474,6 +543,7 @@ def deleteArmour(id):
         return 'There was a problem deleting your armour.'
 
 @app.route('/viewArmour/<int:id>')
+@login_required
 def viewArmour(id):
     armourToDisplay = Armour.query.get_or_404(id)
 
@@ -483,6 +553,7 @@ def viewArmour(id):
         return 'There was a problem displaying your armour.'
 
 @app.route('/updateArmour/<int:id>', methods=['GET', 'POST'])
+@login_required
 def updateArmour(id):
     armour = Armour.query.get_or_404(id)
 
@@ -502,12 +573,13 @@ def updateArmour(id):
 
 # Location-related functionality:
 @app.route('/locations.html', methods=['POST', 'GET'])
+@login_required
 def locations():
     if request.method == 'POST':
         l_Name = request.form['lName']
         l_Desc = request.form['lDesc']
 
-        new_location = Location(lName=l_Name, lDesc=l_Desc)
+        new_location = Location(creatorID=current_user.id, lName=l_Name, lDesc=l_Desc)
 
         try:
             db.session.add(new_location)
@@ -516,10 +588,11 @@ def locations():
         except:
             return 'There was an issue adding your location to the database.'
     else:
-        locations = Location.query.order_by(Location.lID).all()
+        locations = Location.query.filter_by(creatorID=current_user.id).order_by(Location.lID).all()
         return render_template('locations.html', locations=locations)
 
 @app.route('/deleteLocation/<int:id>')
+@login_required
 def deleteLocation(id):
     location_to_delete = Location.query.get_or_404(id)
 
@@ -531,6 +604,7 @@ def deleteLocation(id):
         return 'There was a problem deleting your location.'
 
 @app.route('/updateLocation/<int:id>', methods=['GET', 'POST'])
+@login_required
 def updateLocation(id):
     location = Location.query.get_or_404(id)
 
@@ -545,6 +619,12 @@ def updateLocation(id):
             return 'There was a problem updating your location.'
     else:
         return render_template('updateLocation.html', location=location)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
 
 # Run the app in debug mode:
 if __name__ == "__main__":

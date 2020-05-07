@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block head %}
-<title>Welcome!</title>
+<title>Login Page</title>
 {% endblock %}
 
 {% block content %}
@@ -14,17 +15,26 @@
                 <a class="nav-item nav-link" href="./weapons.html">Weapons</a>
                 <a class="nav-item nav-link" href="./armours.html">Armours</a>
                 <a class="nav-item nav-link" href="./locations.html">Locations</a>
-                <a class="nav-item nav-link" href="./login.html">Login</a>
+                <a class="nav-item nav-link active" href="./login.html">Login <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="./signup.html">Sign-Up</a>
             </div>
         </div>
-        <form class="form-inline" action="/logout">
-            <button type="submit" class="btn btn-outline-link">Logout</button>
-        </form>
     </nav>
-
-    <h1><b><u>Welcome!</u></b></h1>
-    <p><b>Please <a href="./login.html">login here</a> or <a href="./signup.html">sign-up here</a>.</b></p>
-
+    <form method="POST" action="/login.html">
+        <h2><b><u>Login Below:</u></b></h2>
+        {{ form.hidden_tag() }}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ wtf.form_field(form.uName) }}
+            </div>
+            
+            <div class="form-group col-md-6">
+                {{ wtf.form_field(form.pwd) }}
+            </div>
+        </div>
+        
+        {{ wtf.form_field(form.rememberUser) }}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
 </div>
 {% endblock %}
